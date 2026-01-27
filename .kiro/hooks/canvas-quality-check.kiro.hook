@@ -1,0 +1,17 @@
+{
+  "enabled": true,
+  "name": "Canvas Quality Check",
+  "description": "Automatically reviews Canvas API usage, event handler optimization, and memory management patterns when JavaScript files are edited",
+  "version": "1",
+  "when": {
+    "type": "fileEdited",
+    "patterns": [
+      "*.js",
+      "src/**/*.js"
+    ]
+  },
+  "then": {
+    "type": "askAgent",
+    "prompt": "Review the edited file for code quality issues:\n1. Canvas API usage: Check for proper context usage, unnecessary redraws, and performance optimizations\n2. Event handler optimization: Verify event listeners are properly added/removed, check for memory leaks from uncleaned handlers\n3. Memory management: Look for potential memory leaks, unused references, proper cleanup in lifecycle methods, and resource disposal\n\nProvide specific feedback only if issues are found. Focus on performance and memory concerns."
+  }
+}

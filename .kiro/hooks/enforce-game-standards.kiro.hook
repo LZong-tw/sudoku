@@ -1,0 +1,15 @@
+{
+  "enabled": true,
+  "name": "Enforce Game Standards",
+  "description": "Reviews code for game coding standards including class naming conventions (PascalCase for classes, camelCase for methods), performance patterns (efficient collision detection, proper resource cleanup), and best practices (separation of concerns, proper event handling)",
+  "version": "1",
+  "when": {
+    "type": "userTriggered"
+  },
+  "then": {
+    "type": "askAgent",
+    "prompt": "Review the current codebase for game coding standards compliance. Check for: 1) Class naming conventions - classes should use PascalCase, methods should use camelCase, 2) Performance patterns - efficient collision detection, proper canvas rendering, resource cleanup in destructors, 3) Architecture patterns - separation of concerns between game logic, rendering, and input handling, 4) Best practices - proper event listener management, no memory leaks, consistent error handling. Report any violations and suggest improvements."
+  },
+  "workspaceFolderName": "kiro-introduction-starter-kit",
+  "shortName": "enforce-game-standards"
+}

@@ -1,0 +1,19 @@
+{
+  "enabled": true,
+  "name": "Game Balance Validator",
+  "description": "Automatically checks game mechanics balance, difficulty progression, and wall gap sizing validation when game files are edited to ensure fair and playable game difficulty",
+  "version": "1",
+  "when": {
+    "type": "fileEdited",
+    "patterns": [
+      "src/Game.js",
+      "src/PipeManager.js",
+      "src/Ghost.js",
+      "src/Pipe.js"
+    ]
+  },
+  "then": {
+    "type": "askAgent",
+    "prompt": "Review the edited file and validate: 1) Game mechanics balance (gravity, jump force, pipe speed are proportional), 2) Difficulty progression (speed increases, gap sizes, spawn rates are reasonable), 3) Wall/pipe gap sizing (gaps are achievable but challenging). Check constants and formulas to ensure the game remains playable and fair. Report any balance issues or suggest improvements."
+  }
+}

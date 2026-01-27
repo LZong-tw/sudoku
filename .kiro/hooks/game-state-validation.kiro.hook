@@ -1,0 +1,20 @@
+{
+  "enabled": true,
+  "name": "Game State Validation",
+  "description": "Validates Ghosty movement bounds, wall generation rules, and score calculation accuracy when game files are modified",
+  "version": "1",
+  "when": {
+    "type": "fileEdited",
+    "patterns": [
+      "src/Game.js",
+      "src/Ghost.js",
+      "src/PipeManager.js",
+      "src/ScoreManager.js",
+      "src/CollisionDetector.js"
+    ]
+  },
+  "then": {
+    "type": "askAgent",
+    "prompt": "Run property-based tests to verify: 1) Ghosty stays within valid movement bounds, 2) Wall/pipe generation follows correct spacing and gap rules, 3) Score calculations are accurate. Execute the relevant property tests from src/__tests__ and report any violations."
+  }
+}

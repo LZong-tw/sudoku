@@ -1,0 +1,17 @@
+{
+  "enabled": true,
+  "name": "Validate Game Architecture",
+  "description": "Validates game architecture patterns, modular design, and collision detection algorithms when game source files are edited",
+  "version": "1",
+  "when": {
+    "type": "fileEdited",
+    "patterns": [
+      "src/*.js",
+      "src/__tests__/*.js"
+    ]
+  },
+  "then": {
+    "type": "askAgent",
+    "prompt": "Review the edited file for:\n1. Game architecture patterns - ensure proper separation of concerns (Game, Ghost, Pipe, PipeManager, CollisionDetector, Renderer, InputHandler, AudioManager, ScoreManager)\n2. Modular design - verify each module has a single responsibility and clear interfaces\n3. Collision detection algorithms - validate collision logic is accurate, efficient, and properly handles edge cases\n4. Code quality - check for proper encapsulation, minimal coupling, and adherence to existing patterns\n\nProvide specific feedback if any issues are found."
+  }
+}

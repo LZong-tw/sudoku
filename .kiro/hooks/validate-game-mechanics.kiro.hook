@@ -1,0 +1,21 @@
+{
+  "enabled": true,
+  "name": "Validate Game Mechanics",
+  "description": "Validates collision boundaries, physics constants, and scoring logic integrity when game mechanics files are edited",
+  "version": "1",
+  "when": {
+    "type": "fileEdited",
+    "patterns": [
+      "src/CollisionDetector.js",
+      "src/Ghost.js",
+      "src/ScoreManager.js",
+      "src/Game.js",
+      "src/Pipe.js",
+      "src/PipeManager.js"
+    ]
+  },
+  "then": {
+    "type": "askAgent",
+    "prompt": "Validate the edited file for:\n1. Collision boundaries are within valid canvas dimensions and properly defined\n2. Physics constants (gravity, velocity, acceleration) are reasonable and won't cause game-breaking behavior\n3. Scoring logic maintains integrity (no negative scores, proper increment logic, score persistence)\n4. Boundary checks prevent out-of-bounds errors\n5. Constants are properly typed and within expected ranges\n\nRun relevant tests if available and report any issues found."
+  }
+}

@@ -1,0 +1,17 @@
+{
+  "enabled": true,
+  "name": "Game Performance Standards",
+  "description": "Enforces standards for animation frame handling (requestAnimationFrame usage), input responsiveness (event debouncing/throttling), and asset management efficiency (proper loading/cleanup) in game code",
+  "version": "1",
+  "when": {
+    "type": "fileEdited",
+    "patterns": [
+      "src/**/*.js",
+      "main.js"
+    ]
+  },
+  "then": {
+    "type": "askAgent",
+    "prompt": "Review the edited file for game performance standards:\n\n1. Animation Frame Handling:\n   - Verify requestAnimationFrame is used instead of setInterval/setTimeout for game loops\n   - Check that animation frame IDs are properly stored and cancelled on cleanup\n   - Ensure frame timing calculations use performance.now() or similar high-resolution timing\n\n2. Input Responsiveness:\n   - Verify input handlers don't block the main thread\n   - Check for proper event listener cleanup (removeEventListener)\n   - Ensure input state is managed efficiently without redundant processing\n\n3. Asset Management Efficiency:\n   - Verify assets are loaded asynchronously and cached appropriately\n   - Check that audio/image resources are properly released when no longer needed\n   - Ensure no memory leaks from unreleased resources or event listeners\n\nIf any issues are found, provide specific recommendations for improvement."
+  }
+}

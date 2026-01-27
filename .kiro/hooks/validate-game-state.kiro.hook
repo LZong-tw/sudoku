@@ -1,0 +1,19 @@
+{
+  "enabled": true,
+  "name": "Validate Game State",
+  "description": "Validates game state consistency when Ghost, Pipe, or Game engine classes are modified to ensure game logic remains coherent",
+  "version": "1",
+  "when": {
+    "type": "fileEdited",
+    "patterns": [
+      "src/Ghost.js",
+      "src/Pipe.js",
+      "src/Game.js",
+      "src/PipeManager.js"
+    ]
+  },
+  "then": {
+    "type": "askAgent",
+    "prompt": "Validate game state consistency by checking: 1) Ghost physics and boundaries are correct, 2) Pipe collision detection logic is sound, 3) Game state transitions are valid, 4) Score tracking aligns with game events. Run relevant tests if available."
+  }
+}

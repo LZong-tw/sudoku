@@ -1,0 +1,53 @@
+/**
+ * CSS Variables for theming
+ * Task 24.1: Define CSS variables for themes
+ */
+
+:root {
+  /* Light theme colors */
+  --bg-primary: #ffffff;
+  --bg-secondary: #f5f5f5;
+  --bg-tertiary: #e0e0e0;
+  --text-primary: #333333;
+  --text-secondary: #666666;
+  --text-tertiary: #999999;
+  
+  /* Grid colors */
+  --grid-border: #333333;
+  --grid-border-light: #cccccc;
+  --cell-bg: #ffffff;
+  --cell-bg-hover: #f0f0f0;
+  --cell-bg-selected: #bbdefb;
+  --cell-bg-highlight: #e3f2fd;
+  --cell-bg-same-number: #fff9c4;
+  --cell-bg-conflict: #ffebee;
+  --cell-text-fixed: #000000;
+  --cell-text-user: #1976d2;
+  --cell-text-hint: #4caf50;
+  --cell-text-conflict: #d32f2f;
+  
+  /* UI colors */
+  --primary-color: #4a90e2;
+  --primary-hover: #357abd;
+  --secondary-color: #6c757d;
+  --success-color: #4caf50;
+  --error-color: #f44336;
+  --warning-color: #ff9800;
+  
+  /* Spacing */
+  --spacing-xs: 4px;
+  --spacing-sm: 8px;
+  --spacing-md: 16px;
+  --spacing-lg: 24px;
+  --spacing-xl: 32px;
+  
+  /* Border radius */
+  --radius-sm: 4px;
+  --radius-md: 8px;
+  --radius-lg: 12px;
+  
+  /* Shadows */
+  --shadow-sm: 0 1px 3px rgba(0,0,0,0.12);
+  --shadow-md: 0 4px 6px rgba(0,0,0,0.16);
+  --shadow-lg: 0 10px 20px rgba(0,0,0,0.19);
+}

@@ -1,0 +1,56 @@
+/**
+ * Grid styles
+ * Task 24.1: Grid layout and cell styles
+ */
+
+.grid-container {
+  padding: var(--spacing-md);
+  display: flex;
+  justify-content: center;
+}
+
+.sudoku-grid {
+  display: grid;
+  grid-template-columns: repeat(9, 1fr);
+  gap: 0;
+  border: 3px solid var(--grid-border);
+  background-color: var(--grid-border);
+  width: min(90vw, 450px);
+  height: min(90vw, 450px);
+  aspect-ratio: 1;
+}
+
+.cell {
+  background-color: var(--cell-bg);
+  border: 1px solid var(--grid-border-light);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  position: relative;
+  transition: background-color 0.2s;
+}
+
+/* 3x3 box borders */
+.cell:nth-child(9n+3),
+.cell:nth-child(9n+6) {
+  border-right: 2px solid var(--grid-border);
+}
+
+.cell:nth-child(n+19):nth-child(-n+27),
+.cell:nth-child(n+46):nth-child(-n+54) {
+  border-bottom: 2px solid var(--grid-border);
+}
+
+/* Cell states */
+.cell:hover:not(.fixed) {
+  background-color: var(--cell-bg-hover);
+}
+
+.cell.selected {
+  background-color: var(--cell-bg-selected) !important;
+  outline: 3px solid var(--primary-color);
+  outline-offset: -3px;
+  z-index: 1;
+}

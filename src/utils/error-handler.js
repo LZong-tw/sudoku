@@ -63,10 +63,8 @@ export class ErrorHandler {
       context
     };
 
-    // Log to console in development
-    if (process.env.NODE_ENV !== 'production') {
-      console.error('Error logged:', errorInfo);
-    }
+    // Log to console
+    console.error('Error logged:', errorInfo);
 
     // In production, this could send to an error tracking service
     // e.g., Sentry, LogRocket, etc.
@@ -152,6 +150,20 @@ export class ErrorHandler {
         notification.remove();
       }, 300);
     }, duration);
+  }
+
+  /**
+   * Handle an error with logging and user message
+   * 
+   * @static
+   * @param {Error|string} error - Error to handle
+   * @param {string} [userMessage] - Optional user-friendly message
+   */
+  static handle(error, userMessage) {
+    ErrorHandler.logError(error);
+    if (userMessage) {
+      ErrorHandler.showUserMessage(userMessage);
+    }
   }
 
   /**

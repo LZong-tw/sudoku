@@ -1,0 +1,29 @@
+{
+  "name": "sudoku-polish",
+  "version": "1.0.0",
+  "description": "Enhanced Sudoku game with modular architecture",
+  "type": "module",
+  "scripts": {
+    "test": "vitest",
+    "test:ui": "vitest --ui",
+    "test:coverage": "vitest --coverage",
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "keywords": [
+    "sudoku",
+    "game",
+    "puzzle"
+  ],
+  "author": "",
+  "license": "MIT",
+  "devDependencies": {
+    "@vitest/ui": "^1.0.0",
+    "@vitest/coverage-v8": "^1.0.0",
+    "fast-check": "^3.15.0",
+    "jsdom": "^23.0.0",
+    "vite": "^5.0.0",
+    "vitest": "^1.0.0"
+  }
+}

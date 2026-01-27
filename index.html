@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>數獨遊戲</title>
+    <meta name="description" content="功能豐富的數獨遊戲，支持提示、撤銷/重做、統計追蹤、成就系統等功能">
+    <meta name="theme-color" content="#4a90e2">
+    
+    <!-- Preload critical resources -->
+    <link rel="preload" href="/src/main.js" as="script" crossorigin>
+    <link rel="preload" href="/styles.css" as="style">
+    
+    <!-- Main stylesheet -->
+    <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+    <div id="app">
+        <!-- Loading state -->
+        <div class="loading">
+            <div class="loading-spinner" aria-label="Loading"></div>
+            <p>正在加載數獨遊戲...</p>
+        </div>
+    </div>
+    
+    <!-- Main application entry point -->
+    <script type="module" src="/src/main.js"></script>
+</body>
+</html>

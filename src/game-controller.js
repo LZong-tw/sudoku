@@ -947,10 +947,12 @@ export class GameController {
     const results = [];
     for (let row = 0; row < 9; row++) {
       for (let col = 0; col < 9; col++) {
-        const cell = this.grid.getCell(row, col);
-        if (!cell.isFixed && cell.value) {
-          const isCorrect = cell.value === this.grid.solution[row][col];
-          results.push({ row, col, isCorrect });
+        if (!this.grid.isFixed(row, col)) {
+          const value = this.grid.getValue(row, col);
+          if (value) {
+            const isCorrect = value === this.grid.solution[row][col];
+            results.push({ row, col, isCorrect });
+          }
         }
       }
     }

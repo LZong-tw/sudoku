@@ -136,6 +136,7 @@ body {
   user-select: none;
   aspect-ratio: 1;
   min-width: 0;
+  position: relative;
 }
 
 /* 3x3 box borders */
@@ -153,6 +154,27 @@ body {
 .sudoku-cell.error { background: #e94560; }
 .sudoku-cell.complete { background: #2d6a4f; }
 .sudoku-cell.same-value { background: #2d4a3e; }
+
+/* Notes */
+.cell-notes {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.cell-notes .note {
+  font-size: 8px;
+  color: #888;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.cell-value:not(:empty) + .cell-notes { display: none; }
 
 @keyframes pop { 50% { transform: scale(1.2); } }
 @keyframes shake { 25%, 75% { transform: translateX(-3px); } 50% { transform: translateX(3px); } }

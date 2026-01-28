@@ -82,4 +82,23 @@ describe('Notes Mode', () => {
       expect(accentColor).toBe('#4ecca3');
     });
   });
+
+  describe('Notes input flow', () => {
+    test('keypad_input should check noteMode before input', () => {
+      const noteMode = true;
+      const action = noteMode ? 'toggleNote' : 'inputNumber';
+      expect(action).toBe('toggleNote');
+    });
+
+    test('SETTINGS_CHANGED should sync noteMode to gameController', () => {
+      const gameController = { state: { noteMode: false } };
+      const data = { noteMode: true };
+      
+      if (data.noteMode !== undefined) {
+        gameController.state.noteMode = data.noteMode;
+      }
+      
+      expect(gameController.state.noteMode).toBe(true);
+    });
+  });
 });

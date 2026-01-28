@@ -17,8 +17,9 @@ Defines requirements for the notes/pencil mark feature.
 - **Acceptance Criteria**:
   - When notes mode active, clicking number adds/removes note
   - Multiple notes can exist in one cell
-  - Notes display as small numbers in cell
+  - Notes display as 3x3 grid of small numbers in cell
   - Notes cleared when actual value entered
+  - noteMode state syncs between keypad and gameController
 
 ### REQ-NOTES-003: Mobile Guidance
 - **Description**: Help text for mobile users (no hover tooltips)

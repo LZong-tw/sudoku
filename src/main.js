@@ -256,9 +256,21 @@ class SudokuApp {
     // Keypad number input
     this.eventBus.on('keypad_input', (data) => {
       if (this.gameController) {
-        this.gameController.inputNumber(data.value);
+        const { row, col } = this.gameController.state.selectedCell || {};
+        if (row != null && col != null && this.gameController.state.noteMode) {
+          this.gameController.toggleNote(row, col, data.value);
+        } else {
+          this.gameController.inputNumber(data.value);
+        }
         this.updateGridView();
         this.updateInfoPanel();
+      }
+    });
+
+    // Notes mode toggle
+    this.eventBus.on(Events.SETTINGS_CHANGED, (data) => {
+      if (this.gameController && data.noteMode !== undefined) {
+        this.gameController.state.noteMode = data.noteMode;
       }
     });
 

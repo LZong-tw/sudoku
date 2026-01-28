@@ -58,7 +58,7 @@ export class KeypadView {
   /**
    * Renders the keypad HTML structure
    * 
-   * Creates number buttons (1-9) and delete button
+   * Creates number buttons (1-9), delete, and control buttons
    */
   render() {
     // Clear container
@@ -70,7 +70,7 @@ export class KeypadView {
     this.keypadElement.setAttribute('role', 'toolbar');
     this.keypadElement.setAttribute('aria-label', 'Sudoku input keypad');
     
-    // Create number buttons (1-9) + delete
+    // Create number buttons (1-9)
     this.numberButtons = [];
     for (let i = 1; i <= 9; i++) {
       const button = this.createNumberButton(i);
@@ -83,6 +83,15 @@ export class KeypadView {
     deleteBtn.innerHTML = '⌫';
     deleteBtn.setAttribute('aria-label', 'Delete');
     this.keypadElement.appendChild(deleteBtn);
+    
+    // Add control buttons
+    const undoBtn = this.createControlButton('undo', '復原', '↶');
+    const redoBtn = this.createControlButton('redo', '重做', '↷');
+    const hintBtn = this.createControlButton('hint', '提示', '💡');
+    
+    this.keypadElement.appendChild(undoBtn);
+    this.keypadElement.appendChild(redoBtn);
+    this.keypadElement.appendChild(hintBtn);
     
     this.container.appendChild(this.keypadElement);
   }

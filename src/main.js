@@ -72,6 +72,9 @@ class SudokuApp {
         this.updateInfoPanel();
       }, 1000);
       
+      // Keyboard input
+      document.addEventListener('keydown', (e) => this.handleKeyboard(e));
+      
       // Mobile: scroll to grid after load
       if (window.innerWidth < 600) {
         setTimeout(() => {
@@ -401,8 +404,8 @@ class SudokuApp {
       
       // Update timer
       const timerDisplay = document.getElementById('timer-display');
-      if (timerDisplay && state.timer) {
-        const seconds = state.timer.getElapsedSeconds ? state.timer.getElapsedSeconds() : 0;
+      if (timerDisplay) {
+        const seconds = state.elapsedTime || 0;
         const mins = Math.floor(seconds / 60);
         const secs = seconds % 60;
         timerDisplay.textContent = `${String(mins).padStart(2, '0')}:${String(secs).padStart(2, '0')}`;
@@ -465,6 +468,38 @@ class SudokuApp {
       } else {
         alert('請先填入一些數字');
       }
+    }
+  }
+
+  /**
+   * Handle keyboard input
+   */
+  handleKeyboard(e) {
+    if (!this.gameController) return;
+    
+    // Numbers 1-9
+    if (e.key >= '1' && e.key <= '9') {
+      this.gameController.inputNumber(parseInt(e.key));
+      this.updateGridView();
+      this.updateInfoPanel();
+    }
+    // Delete/Backspace
+    else if (e.key === 'Backspace' || e.key === 'Delete') {
+      this.gameController.inputNumber(0);
+      this.updateGridView();
+      this.updateInfoPanel();
+    }
+    // Arrow keys
+    else if (e.key.startsWith('Arrow')) {
+      e.preventDefault();
+      const state = this.gameController.getState();
+      let { row, col } = state.selectedCell;
+      if (e.key === 'ArrowUp' && row > 0) row--;
+      else if (e.key === 'ArrowDown' && row < 8) row++;
+      else if (e.key === 'ArrowLeft' && col > 0) col--;
+      else if (e.key === 'ArrowRight' && col < 8) col++;
+      this.gameController.selectCell(row, col);
+      this.updateGridView();
     }
   }
 }

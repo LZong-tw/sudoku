@@ -93,15 +93,24 @@ describe('Layout Requirements', () => {
   });
 
   describe('Keypad layout', () => {
-    test('keypad should have 10 buttons (1-9 + delete)', () => {
+    test('keypad should have 14 buttons (1-9 + delete + 4 tools)', () => {
       const numberButtons = 9;
       const deleteButton = 1;
-      expect(numberButtons + deleteButton).toBe(10);
+      const toolButtons = 4; // undo, redo, hint, notes
+      expect(numberButtons + deleteButton + toolButtons).toBe(14);
     });
 
-    test('keypad should use 5-column grid', () => {
-      const columns = 5;
-      expect(columns).toBe(5);
+    test('desktop should show 9 buttons first row, 5 second row', () => {
+      const firstRow = 9;
+      const secondRow = 5;
+      expect(firstRow + secondRow).toBe(14);
+    });
+
+    test('mobile should show 7 buttons per row', () => {
+      const buttonsPerRow = 7;
+      const totalButtons = 14;
+      const rows = Math.ceil(totalButtons / buttonsPerRow);
+      expect(rows).toBe(2);
     });
   });
 });

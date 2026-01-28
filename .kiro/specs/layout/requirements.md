@@ -42,12 +42,12 @@ Defines layout structure and responsive behavior for optimal UX on desktop and m
   - Value in accent color (#4ecca3)
 
 ### REQ-LAYOUT-005: Keypad Layout
-- **Description**: Number input buttons
+- **Description**: Number input and tool buttons
 - **Acceptance Criteria**:
-  - 5-column grid layout
-  - Buttons 1-9 plus delete (⌫)
+  - 14 buttons total: 1-9, ⌫, ↶, ↷, 💡, ✏️
+  - Desktop (601px+): 9 buttons first row, 5 second row
+  - Mobile (<600px): 7 buttons per row
   - Min touch target 40x40px
-  - Centered below controls
 
 ### REQ-LAYOUT-006: Cell States
 - **Description**: Visual feedback for cell states

@@ -43,10 +43,12 @@ Defines requirements for the advanced feature buttons in the header.
 ### REQ-FEAT-005: Settings Panel
 - **Description**: User preferences configuration
 - **Acceptance Criteria**:
-  - Theme selection (light/dark)
-  - Sound on/off toggle
-  - Auto-check toggle
-  - Highlight same numbers toggle
+  - Theme selection (light/dark) via dropdown
+  - Sound on/off toggle switch
+  - Auto-check toggle switch
+  - Highlight same numbers toggle switch
+  - Reset statistics button (red, danger action)
+  - Uses settings-panel, settings-control classes
 
 
 ### REQ-FEAT-006: Modal Styling

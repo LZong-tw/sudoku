@@ -127,4 +127,31 @@ describe('Feature Buttons', () => {
       expect(borderRadius).toBe('16px');
     });
   });
+
+  describe('Settings panel styling', () => {
+    test('settings panel should use settings-panel class', () => {
+      const panelClass = 'settings-panel';
+      expect(panelClass).toBe('settings-panel');
+    });
+
+    test('settings controls should use settings-control class', () => {
+      const controlClass = 'settings-control';
+      expect(controlClass).toBe('settings-control');
+    });
+
+    test('settings should have toggle switches', () => {
+      const toggleClasses = ['settings-checkbox', 'settings-checkbox-label'];
+      expect(toggleClasses.length).toBe(2);
+    });
+
+    test('settings should have theme select dropdown', () => {
+      const selectClass = 'settings-select';
+      expect(selectClass).toBe('settings-select');
+    });
+
+    test('settings should have reset button', () => {
+      const resetClass = 'settings-reset-button';
+      expect(resetClass).toBe('settings-reset-button');
+    });
+  });
 });

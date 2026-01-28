@@ -330,7 +330,9 @@ class SudokuApp {
   showAchievements() {
     if (this.gameController) {
       const achievements = this.gameController.achievementSystem.getAllAchievements();
-      const progress = this.gameController.achievementSystem.getProgress();
+      const unlocked = achievements.filter(a => a.unlocked).length;
+      const total = achievements.length;
+      const progress = total > 0 ? Math.round((unlocked / total) * 100) : 0;
       
       this.ui.achievementView.show(achievements, progress);
     }

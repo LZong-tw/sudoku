@@ -260,6 +260,11 @@ class SudokuApp {
         const grid = this.gameController.getGrid();
         const hasValue = grid && row != null && col != null && grid.getValue(row, col);
         
+        if (this.gameController.state.noteMode && hasValue) {
+          this.showToast('已有數字，無法加筆記');
+          return;
+        }
+        
         if (row != null && col != null && this.gameController.state.noteMode && !hasValue) {
           this.gameController.toggleNote(row, col, data.value);
         } else {
@@ -480,6 +485,22 @@ class SudokuApp {
         this.showModal('請先填入一些數字');
       }
     }
+  }
+
+  /**
+   * Show toast message
+   */
+  showToast(message) {
+    let toast = document.getElementById('toast');
+    if (!toast) {
+      toast = document.createElement('div');
+      toast.id = 'toast';
+      toast.className = 'toast';
+      document.body.appendChild(toast);
+    }
+    toast.textContent = message;
+    toast.classList.add('show');
+    setTimeout(() => toast.classList.remove('show'), 2000);
   }
 
   /**

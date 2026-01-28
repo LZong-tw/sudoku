@@ -39,6 +39,8 @@ Defines requirements for the notes/pencil mark feature.
 ### REQ-NOTES-005: Visual Feedback
 - **Description**: Clear indication of notes mode state
 - **Acceptance Criteria**:
-  - Active: button background #4ecca3 (accent color)
+  - Active: button background #4ecca3 with glow effect
   - Inactive: button background #16213e (dark)
   - Transition animation on state change
+  - Notes mode indicator badge at top right
+  - Toast message when trying to add notes to cell with value

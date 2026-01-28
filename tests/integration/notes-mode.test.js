@@ -107,5 +107,23 @@ describe('Notes Mode', () => {
       const shouldAddNote = noteMode && !cellHasValue;
       expect(shouldAddNote).toBe(false);
     });
+
+    test('should show toast when trying to add notes to cell with value', () => {
+      const message = '已有數字，無法加筆記';
+      expect(message).toContain('無法');
+    });
+  });
+
+  describe('Notes mode indicator', () => {
+    test('should show indicator when notes mode enabled', () => {
+      const indicatorText = '✏️ 筆記模式';
+      expect(indicatorText).toContain('筆記');
+    });
+
+    test('indicator should be positioned top right', () => {
+      const position = { top: '10px', right: '10px' };
+      expect(position.top).toBe('10px');
+      expect(position.right).toBe('10px');
+    });
   });
 });

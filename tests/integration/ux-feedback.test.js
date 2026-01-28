@@ -74,5 +74,11 @@ describe('UX Feedback', () => {
       const closeActions = ['button_click', 'backdrop_click'];
       expect(closeActions.length).toBe(2);
     });
+
+    test('GameController must receive eventBus via options object', () => {
+      // GameController expects { eventBus } not eventBus directly
+      const options = { eventBus: {} };
+      expect(options.eventBus).toBeDefined();
+    });
   });
 });

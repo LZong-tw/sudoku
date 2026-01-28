@@ -27,3 +27,4 @@ Defines requirements for user experience feedback on game actions.
   - Message in Chinese (恭喜)
   - Triggered by game_completed event
   - Dismissible by button or backdrop click
+  - GameController must share same eventBus instance as main app

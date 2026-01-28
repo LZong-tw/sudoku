@@ -1,15 +1,13 @@
 {
   "enabled": true,
   "name": "Enforce Game Standards",
-  "description": "Reviews code for game coding standards including class naming conventions (PascalCase for classes, camelCase for methods), performance patterns (efficient collision detection, proper resource cleanup), and best practices (separation of concerns, proper event handling)",
+  "description": "Reviews code for Sudoku coding standards including naming conventions, performance patterns, and best practices",
   "version": "1",
   "when": {
     "type": "userTriggered"
   },
   "then": {
     "type": "askAgent",
-    "prompt": "Review the current codebase for game coding standards compliance. Check for: 1) Class naming conventions - classes should use PascalCase, methods should use camelCase, 2) Performance patterns - efficient collision detection, proper canvas rendering, resource cleanup in destructors, 3) Architecture patterns - separation of concerns between game logic, rendering, and input handling, 4) Best practices - proper event listener management, no memory leaks, consistent error handling. Report any violations and suggest improvements."
-  },
-  "workspaceFolderName": "kiro-introduction-starter-kit",
-  "shortName": "enforce-game-standards"
+    "prompt": "Review the current codebase for coding standards compliance:\n\n1. Naming conventions:\n   - Classes: PascalCase (GridModel, GameController)\n   - Methods: camelCase (setValue, toggleNote)\n   - Events: snake_case (cell_selected, game_completed)\n\n2. Performance patterns:\n   - DOM updates batched\n   - Event listeners cleaned up in destroy()\n   - Intervals cleared on cleanup\n\n3. Architecture patterns:\n   - EventBus for component communication\n   - No direct UI-to-UI coupling\n   - Separation of concerns\n\n4. Localization:\n   - zh-TW terms only (設定, 標示, 載入)\n   - No zh-CN terms (設置, 高亮, 加載)\n\nReport any violations and suggest improvements."
+  }
 }

@@ -1,19 +1,18 @@
 {
   "enabled": true,
   "name": "Game Balance Validator",
-  "description": "Automatically checks game mechanics balance, difficulty progression, and wall gap sizing validation when game files are edited to ensure fair and playable game difficulty",
+  "description": "Validates puzzle difficulty balance and hint system fairness when puzzle files are edited",
   "version": "1",
   "when": {
     "type": "fileEdited",
     "patterns": [
-      "src/Game.js",
-      "src/PipeManager.js",
-      "src/Ghost.js",
-      "src/Pipe.js"
+      "src/features/puzzle-library.js",
+      "src/features/puzzle-generator.js",
+      "src/core/hint-system.js"
     ]
   },
   "then": {
     "type": "askAgent",
-    "prompt": "Review the edited file and validate: 1) Game mechanics balance (gravity, jump force, pipe speed are proportional), 2) Difficulty progression (speed increases, gap sizes, spawn rates are reasonable), 3) Wall/pipe gap sizing (gaps are achievable but challenging). Check constants and formulas to ensure the game remains playable and fair. Report any balance issues or suggest improvements."
+    "prompt": "Review the edited file and validate:\n1. Puzzle difficulty balance:\n   - Easy: 38-45 clues (beginner friendly)\n   - Medium: 28-34 clues (moderate challenge)\n   - Hard: 22-27 clues (expert level)\n2. Hint system fairness:\n   - Hints reveal cells with fewest candidates first\n   - Hint count is tracked per game\n3. Daily challenge consistency:\n   - Same puzzle for same date\n   - Difficulty rotation is fair\n\nReport any balance issues or suggest improvements."
   }
 }

@@ -1,17 +1,17 @@
 {
   "enabled": true,
-  "name": "Canvas Quality Check",
-  "description": "Automatically reviews Canvas API usage, event handler optimization, and memory management patterns when JavaScript files are edited",
+  "name": "UI Quality Check",
+  "description": "Reviews UI components for DOM efficiency, event handling, and memory management",
   "version": "1",
   "when": {
     "type": "fileEdited",
     "patterns": [
-      "*.js",
-      "src/**/*.js"
+      "src/ui/*.js",
+      "src/main.js"
     ]
   },
   "then": {
     "type": "askAgent",
-    "prompt": "Review the edited file for code quality issues:\n1. Canvas API usage: Check for proper context usage, unnecessary redraws, and performance optimizations\n2. Event handler optimization: Verify event listeners are properly added/removed, check for memory leaks from uncleaned handlers\n3. Memory management: Look for potential memory leaks, unused references, proper cleanup in lifecycle methods, and resource disposal\n\nProvide specific feedback only if issues are found. Focus on performance and memory concerns."
+    "prompt": "Review the edited file for UI quality:\n\n1. DOM efficiency:\n   - Batch DOM updates where possible\n   - Use document fragments for multiple insertions\n   - Avoid layout thrashing\n\n2. Event handling:\n   - Event listeners added in initialize/attachEventListeners\n   - Event listeners removed in destroy()\n   - Use event delegation where appropriate\n\n3. Memory management:\n   - destroy() method cleans up all resources\n   - No orphaned event listeners\n   - Intervals/timeouts cleared\n\n4. Accessibility:\n   - ARIA labels where needed\n   - Keyboard navigation support\n   - Focus management in modals\n\nProvide specific feedback only if issues are found."
   }
 }

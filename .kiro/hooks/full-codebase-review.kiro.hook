@@ -1,15 +1,13 @@
 {
   "enabled": true,
   "name": "Full Codebase Review",
-  "description": "Comprehensive review of entire codebase covering all quality standards: architecture, performance, game mechanics, balance, state validation, and coding standards",
+  "description": "Comprehensive review of entire Sudoku codebase covering architecture, performance, game mechanics, and coding standards",
   "version": "1",
   "when": {
     "type": "userTriggered"
   },
   "then": {
     "type": "askAgent",
-    "prompt": "Perform a comprehensive review of the entire game codebase. Check all source files in src/ directory for:\n\n1. ARCHITECTURE & DESIGN:\n   - Proper separation of concerns (Game, Ghost, Pipe, PipeManager, CollisionDetector, Renderer, InputHandler, AudioManager, ScoreManager)\n   - Modular design with single responsibility per module\n   - Clear interfaces and minimal coupling\n   - Proper encapsulation\n\n2. CODE QUALITY & STANDARDS:\n   - Class naming: PascalCase for classes, camelCase for methods\n   - Consistent error handling\n   - Proper event listener management\n   - No memory leaks\n\n3. PERFORMANCE:\n   - Canvas API usage: proper context usage, no unnecessary redraws\n   - requestAnimationFrame instead of setInterval/setTimeout\n   - Efficient collision detection algorithms\n   - Proper resource cleanup and disposal\n   - Event handler optimization\n   - Asset management efficiency\n\n4. GAME MECHANICS:\n   - Collision boundaries within valid canvas dimensions\n   - Physics constants (gravity, velocity) are reasonable\n   - Scoring logic integrity (no negative scores, proper increments)\n   - Boundary checks prevent out-of-bounds errors\n\n5. GAME BALANCE:\n   - Game mechanics balance (gravity, jump force, pipe speed proportional)\n   - Difficulty progression is reasonable\n   - Wall/pipe gaps are achievable but challenging\n\n6. GAME STATE VALIDATION:\n   - Ghost stays within valid movement bounds\n   - Wall/pipe generation follows correct spacing rules\n   - Score calculations are accurate\n   - Game state transitions are valid\n\nRun all relevant tests from src/__tests__/ and provide a summary report with:\n- Files reviewed\n- Issues found (categorized by severity)\n- Specific recommendations for improvements\n- Test results summary"
-  },
-  "workspaceFolderName": "kiro-introduction-starter-kit",
-  "shortName": "full-codebase-review"
+    "prompt": "Perform a comprehensive review of the Sudoku codebase. Check all source files in src/ directory for:\n\n1. ARCHITECTURE & DESIGN:\n   - Proper separation of concerns (GameController, GridModel, UI components, Features)\n   - Modular design with single responsibility per module\n   - EventBus usage for component communication\n   - Proper encapsulation\n\n2. CODE QUALITY & STANDARDS:\n   - Class naming: PascalCase for classes, camelCase for methods\n   - Consistent error handling\n   - Proper event listener management\n   - No memory leaks (destroy methods, interval cleanup)\n\n3. PERFORMANCE:\n   - DOM operations batched where possible\n   - Event delegation used appropriately\n   - Proper resource cleanup and disposal\n   - localStorage access optimized\n\n4. GAME MECHANICS:\n   - Sudoku validation logic correct\n   - Puzzle difficulty clue counts (Easy: 38-45, Medium: 28-34, Hard: 22-27)\n   - Hint system provides valid hints\n   - Notes mode works correctly\n\n5. LOCALIZATION:\n   - Using zh-TW (Taiwan) terms, not zh-CN\n   - 設定 not 設置, 標示 not 高亮, 載入 not 加載\n\nRun all tests and provide a summary report with:\n- Files reviewed\n- Issues found (categorized by severity)\n- Specific recommendations\n- Test results summary"
+  }
 }

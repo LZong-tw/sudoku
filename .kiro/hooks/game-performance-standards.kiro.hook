@@ -1,17 +1,16 @@
 {
   "enabled": true,
-  "name": "Game Performance Standards",
-  "description": "Enforces standards for animation frame handling (requestAnimationFrame usage), input responsiveness (event debouncing/throttling), and asset management efficiency (proper loading/cleanup) in game code",
+  "name": "Performance Standards",
+  "description": "Enforces standards for timer handling, input responsiveness, and storage efficiency",
   "version": "1",
   "when": {
     "type": "fileEdited",
     "patterns": [
-      "src/**/*.js",
-      "main.js"
+      "src/**/*.js"
     ]
   },
   "then": {
     "type": "askAgent",
-    "prompt": "Review the edited file for game performance standards:\n\n1. Animation Frame Handling:\n   - Verify requestAnimationFrame is used instead of setInterval/setTimeout for game loops\n   - Check that animation frame IDs are properly stored and cancelled on cleanup\n   - Ensure frame timing calculations use performance.now() or similar high-resolution timing\n\n2. Input Responsiveness:\n   - Verify input handlers don't block the main thread\n   - Check for proper event listener cleanup (removeEventListener)\n   - Ensure input state is managed efficiently without redundant processing\n\n3. Asset Management Efficiency:\n   - Verify assets are loaded asynchronously and cached appropriately\n   - Check that audio/image resources are properly released when no longer needed\n   - Ensure no memory leaks from unreleased resources or event listeners\n\nIf any issues are found, provide specific recommendations for improvement."
+    "prompt": "Review the edited file for performance standards:\n\n1. Timer Handling:\n   - Timer starts on first input, not on new game\n   - setInterval IDs stored and cleared on cleanup\n   - Use appropriate update frequency (1s for display)\n\n2. Input Responsiveness:\n   - Keyboard handlers don't block main thread\n   - Touch/click handlers respond immediately\n   - Debounce rapid inputs where needed\n\n3. Storage Efficiency:\n   - Batch localStorage writes where possible\n   - Don't save on every keystroke\n   - Handle storage errors gracefully\n\n4. Event System:\n   - EventBus listeners cleaned up\n   - No duplicate event subscriptions\n   - Use once() for one-time events\n\nProvide recommendations if issues are found."
   }
 }

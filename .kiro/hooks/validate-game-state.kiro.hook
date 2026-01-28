@@ -1,19 +1,18 @@
 {
   "enabled": true,
   "name": "Validate Game State",
-  "description": "Validates game state consistency when Ghost, Pipe, or Game engine classes are modified to ensure game logic remains coherent",
+  "description": "Validates game state consistency when core game files are modified",
   "version": "1",
   "when": {
     "type": "fileEdited",
     "patterns": [
-      "src/Ghost.js",
-      "src/Pipe.js",
-      "src/Game.js",
-      "src/PipeManager.js"
+      "src/game-controller.js",
+      "src/core/grid-model.js",
+      "src/core/history-manager.js"
     ]
   },
   "then": {
     "type": "askAgent",
-    "prompt": "Validate game state consistency by checking: 1) Ghost physics and boundaries are correct, 2) Pipe collision detection logic is sound, 3) Game state transitions are valid, 4) Score tracking aligns with game events. Run relevant tests if available."
+    "prompt": "Validate game state consistency by checking:\n1. Grid state - values stay within 0-9, fixed cells cannot be modified\n2. Selection state - selectedCell coordinates are valid (0-8)\n3. Game state transitions - paused, completed states are valid\n4. History state - undo/redo stack integrity\n5. Timer state - starts on first input, pauses correctly\n\nRun relevant tests and report any violations."
   }
 }

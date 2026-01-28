@@ -4,7 +4,7 @@
  */
 
 import { ErrorHandler } from './utils/error-handler.js';
-import { EventBus } from './utils/event-bus.js';
+import { EventBus, Events } from './utils/event-bus.js';
 import { SoundManager } from './utils/sound-manager.js';
 import { GameController } from './game-controller.js';
 import { GridView } from './ui/grid-view.js';
@@ -54,13 +54,18 @@ class SudokuApp {
       this.gameController = new GameController(this.eventBus);
       
       // Initialize sound manager (after game controller for storage access)
-      this.soundManager = new SoundManager(this.gameController.storageManager);
+      this.soundManager = new SoundManager(this.gameController.storageManager, this.eventBus);
       
       // Set up event listeners
       this.setupEventListeners();
       
       // Load saved game or start new game
-      await this.gameController.initialize();
+      if (!this.gameController.restoreGame()) {
+        this.gameController.startNewGame('easy');
+      }
+      
+      // Update grid view with initial state
+      this.updateGridView();
       
       console.log('Sudoku application initialized successfully');
     } catch (error) {
@@ -225,12 +230,51 @@ class SudokuApp {
       this.startNewGame();
     });
 
+    this.eventBus.on('game_started', () => {
+      this.updateGridView();
+    });
+
     this.eventBus.on('view_statistics_requested', () => {
       this.showStatistics();
     });
 
     this.eventBus.on('daily_challenge_start', () => {
       this.startDailyChallenge();
+    });
+
+    // Keypad events
+    this.eventBus.on(Events.VALUE_CHANGED, (data) => {
+      if (this.gameController) {
+        this.gameController.inputNumber(data.value);
+        this.updateGridView();
+      }
+    });
+
+    this.eventBus.on(Events.CELL_SELECTED, (data) => {
+      if (this.gameController) {
+        this.gameController.selectCell(data.row, data.col);
+      }
+    });
+
+    this.eventBus.on(Events.UNDO, () => {
+      if (this.gameController) {
+        this.gameController.undo();
+        this.updateGridView();
+      }
+    });
+
+    this.eventBus.on(Events.REDO, () => {
+      if (this.gameController) {
+        this.gameController.redo();
+        this.updateGridView();
+      }
+    });
+
+    this.eventBus.on(Events.HINT_USED, () => {
+      if (this.gameController) {
+        this.gameController.useHint();
+        this.updateGridView();
+      }
     });
   }
 
@@ -278,6 +322,18 @@ class SudokuApp {
       const difficulty = prompt('選擇難度 (easy/medium/hard):', 'medium');
       if (difficulty && ['easy', 'medium', 'hard'].includes(difficulty)) {
         this.gameController.startNewGame(difficulty);
+      }
+    }
+  }
+
+  /**
+   * Update grid view with current game state
+   */
+  updateGridView() {
+    if (this.gameController && this.ui.gridView) {
+      const grid = this.gameController.getGrid();
+      if (grid) {
+        this.ui.gridView.updateGrid(grid);
       }
     }
   }

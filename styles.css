@@ -1,123 +1,118 @@
-/**
- * CSS Variables for theming
- * Task 24.1: Define CSS variables for themes
- */
-
-:root {
-  /* Light theme colors */
-  --bg-primary: #ffffff;
-  --bg-secondary: #f5f5f5;
-  --bg-tertiary: #e0e0e0;
-  --text-primary: #333333;
-  --text-secondary: #666666;
-  --text-tertiary: #999999;
-  
-  /* Grid colors */
-  --grid-border: #333333;
-  --grid-border-light: #cccccc;
-  --cell-bg: #ffffff;
-  --cell-bg-hover: #f0f0f0;
-  --cell-bg-selected: #bbdefb;
-  --cell-bg-highlight: #e3f2fd;
-  --cell-bg-same-number: #fff9c4;
-  --cell-bg-conflict: #ffebee;
-  --cell-text-fixed: #000000;
-  --cell-text-user: #1976d2;
-  --cell-text-hint: #4caf50;
-  --cell-text-conflict: #d32f2f;
-  
-  /* UI colors */
-  --primary-color: #4a90e2;
-  --primary-hover: #357abd;
-  --secondary-color: #6c757d;
-  --success-color: #4caf50;
-  --error-color: #f44336;
-  --warning-color: #ff9800;
-  
-  /* Spacing */
-  --spacing-xs: 4px;
-  --spacing-sm: 8px;
-  --spacing-md: 16px;
-  --spacing-lg: 24px;
-  --spacing-xl: 32px;
-  
-  /* Border radius */
-  --radius-sm: 4px;
-  --radius-md: 8px;
-  --radius-lg: 12px;
-  
-  /* Shadows */
-  --shadow-sm: 0 1px 3px rgba(0,0,0,0.12);
-  --shadow-md: 0 4px 6px rgba(0,0,0,0.16);
-  --shadow-lg: 0 10px 20px rgba(0,0,0,0.19);
-}
-/**
- * Base styles
- * Task 24.1: Base layout and typography
- */
-
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
+/* Sudoku Game - Based on working sudoku.html styles */
+* { box-sizing: border-box; margin: 0; padding: 0; }
 
 body {
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Helvetica Neue', Arial, sans-serif;
-  background-color: var(--bg-secondary);
-  color: var(--text-primary);
-  line-height: 1.6;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  background: #1a1a2e;
+  color: #eee;
   min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
 }
+
+#app {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+}
+
+.loading {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 50vh;
+  gap: 20px;
+}
+
+.loading-spinner {
+  width: 40px;
+  height: 40px;
+  border: 4px solid #16213e;
+  border-top-color: #4ecca3;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin { to { transform: rotate(360deg); } }
 
 .sudoku-app {
   display: flex;
   flex-direction: column;
-  min-height: 100vh;
-  max-width: 800px;
-  margin: 0 auto;
-  background-color: var(--bg-primary);
+  align-items: center;
+  gap: 20px;
+  width: 100%;
+  max-width: 600px;
 }
 
 /* Header */
 .app-header {
+  width: 100%;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: var(--spacing-md);
-  background-color: var(--primary-color);
-  color: white;
-  box-shadow: var(--shadow-md);
+  background: #16213e;
+  padding: 15px 20px;
+  border-radius: 10px;
 }
 
 .app-title {
-  font-size: 1.5rem;
-  font-weight: 600;
+  color: #4ecca3;
+  font-size: 24px;
+  margin: 0;
 }
 
 .app-header-controls {
   display: flex;
-  gap: var(--spacing-sm);
+  gap: 8px;
 }
 
 .header-btn {
-  background: rgba(255, 255, 255, 0.2);
+  background: transparent;
   border: none;
-  border-radius: var(--radius-md);
-  padding: var(--spacing-sm);
-  font-size: 1.2rem;
+  padding: 8px;
+  font-size: 20px;
   cursor: pointer;
+  border-radius: 6px;
   transition: background 0.2s;
-  min-width: 44px;
-  min-height: 44px;
 }
-/**
- * Grid styles
- * Task 24.1: Grid layout and cell styles
- */
 
+.header-btn:hover {
+  background: #0f3460;
+}
+
+/* Game Info Panel */
+.game-info-panel {
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
+  justify-content: center;
+  background: #16213e;
+  padding: 12px 20px;
+  border-radius: 10px;
+}
+
+.info-item {
+  display: flex;
+  gap: 8px;
+}
+
+.info-label { color: #888; }
+.info-value { color: #4ecca3; font-weight: bold; }
+
+/* Main Game Area */
+.game-main {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 15px;
+}
+
+/* Grid */
 .grid-container {
-  padding: var(--spacing-md);
   display: flex;
   justify-content: center;
 }
@@ -125,81 +120,149 @@ body {
 .sudoku-grid {
   display: grid;
   grid-template-columns: repeat(9, 1fr);
-  gap: 0;
-  border: 3px solid var(--grid-border);
-  background-color: var(--grid-border);
-  width: min(90vw, 450px);
-  height: min(90vw, 450px);
+  gap: 2px;
+  background: #0f3460;
+  padding: 3px;
+  border-radius: 10px;
+  width: min(90vw, 400px);
   aspect-ratio: 1;
 }
 
-.cell {
-  background-color: var(--cell-bg);
-  border: 1px solid var(--grid-border-light);
+.sudoku-cell {
+  background: #16213e;
   display: flex;
-  flex-direction: column;
   align-items: center;
   justify-content: center;
+  font-size: clamp(16px, 5vw, 24px);
   cursor: pointer;
-  position: relative;
-  transition: background-color 0.2s;
+  transition: all 0.15s;
+  user-select: none;
 }
 
 /* 3x3 box borders */
-.cell:nth-child(9n+3),
-.cell:nth-child(9n+6) {
-  border-right: 2px solid var(--grid-border);
+.sudoku-cell:nth-child(3n) { border-right: 2px solid #0f3460; }
+.sudoku-cell:nth-child(9n) { border-right: none; }
+.sudoku-cell:nth-child(n+19):nth-child(-n+27),
+.sudoku-cell:nth-child(n+46):nth-child(-n+54) { border-bottom: 2px solid #0f3460; }
+
+.sudoku-cell.selected { background: #4ecca3; color: #1a1a2e; transform: scale(1.05); }
+.sudoku-cell.highlighted { background: #233554; }
+.sudoku-cell.fixed { color: #888; }
+.sudoku-cell.error { background: #e94560; }
+.sudoku-cell.same-value { background: #2d4a3e; }
+
+@keyframes pop { 50% { transform: scale(1.2); } }
+@keyframes shake { 25%, 75% { transform: translateX(-3px); } 50% { transform: translateX(3px); } }
+
+.sudoku-cell.valid { animation: pop 0.2s; }
+.sudoku-cell.invalid { animation: shake 0.3s; }
+
+/* Keypad */
+.keypad-container {
+  display: flex;
+  justify-content: center;
 }
 
-.cell:nth-child(n+19):nth-child(-n+27),
-.cell:nth-child(n+46):nth-child(-n+54) {
-  border-bottom: 2px solid var(--grid-border);
+.keypad {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 5px;
 }
 
-/* Cell states */
-.cell:hover:not(.fixed) {
-  background-color: var(--cell-bg-hover);
+.keypad-btn {
+  background: #4ecca3;
+  color: #1a1a2e;
+  border: none;
+  padding: 15px 20px;
+  border-radius: 8px;
+  font-size: 18px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: transform 0.1s, opacity 0.1s;
 }
 
-.cell.selected {
-  background-color: var(--cell-bg-selected) !important;
-  outline: 3px solid var(--primary-color);
-  outline-offset: -3px;
-  z-index: 1;
+.keypad-btn:hover {
+  opacity: 0.9;
+  transform: translateY(-2px);
 }
-/**
- * Dark theme variables
- * Task 24.1: Dark theme colors
- */
 
-[data-theme="dark"] {
-  /* Dark theme colors */
-  --bg-primary: #1e1e1e;
-  --bg-secondary: #2d2d2d;
-  --bg-tertiary: #3d3d3d;
-  --text-primary: #e0e0e0;
-  --text-secondary: #b0b0b0;
-  --text-tertiary: #808080;
-  
-  /* Grid colors */
-  --grid-border: #e0e0e0;
-  --grid-border-light: #555555;
-  --cell-bg: #2d2d2d;
-  --cell-bg-hover: #3d3d3d;
-  --cell-bg-selected: #1565c0;
-  --cell-bg-highlight: #1e3a5f;
-  --cell-bg-same-number: #4a4a2d;
-  --cell-bg-conflict: #4a2d2d;
-  --cell-text-fixed: #ffffff;
-  --cell-text-user: #64b5f6;
-  --cell-text-hint: #81c784;
-  --cell-text-conflict: #ef5350;
-  
-  /* UI colors */
-  --primary-color: #64b5f6;
-  --primary-hover: #42a5f5;
-  --secondary-color: #9e9e9e;
-  --success-color: #66bb6a;
-  --error-color: #ef5350;
-  --warning-color: #ffa726;
+.keypad-btn.tool-btn {
+  background: #16213e;
+  color: #eee;
+  font-size: 16px;
+}
+
+.keypad-btn.tool-btn:hover {
+  background: #233554;
+}
+
+/* Game Controls */
+.game-controls {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-top: 10px;
+}
+
+.control-btn {
+  background: #4ecca3;
+  color: #1a1a2e;
+  border: none;
+  padding: 12px 24px;
+  border-radius: 8px;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: transform 0.1s, opacity 0.1s;
+}
+
+.control-btn:hover {
+  opacity: 0.9;
+  transform: translateY(-2px);
+}
+
+/* Screen reader only */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  border: 0;
+}
+
+/* Modal overlay */
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.7);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s;
+}
+
+.modal-overlay.open {
+  opacity: 1;
+  visibility: visible;
+}
+
+.modal-content {
+  background: #16213e;
+  padding: 30px;
+  border-radius: 12px;
+  max-width: 90vw;
+  max-height: 80vh;
+  overflow-y: auto;
+}
+
+.modal-content h2 {
+  color: #4ecca3;
+  margin-bottom: 20px;
 }

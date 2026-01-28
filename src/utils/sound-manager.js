@@ -34,9 +34,11 @@ export class SoundManager {
   /**
    * Creates a new SoundManager instance
    * @param {Object} storageManager - Storage manager for persisting preferences
+   * @param {EventBus} eventBus - Event bus instance
    */
-  constructor(storageManager) {
+  constructor(storageManager, eventBus) {
     this.storageManager = storageManager;
+    this.eventBus = eventBus;
     this.audioContext = null;
     this.enabled = true;
     this.initialized = false;
@@ -104,12 +106,12 @@ export class SoundManager {
    * @private
    */
   subscribeToEvents() {
-    EventBus.on('cell:input', () => this.playSound(SoundType.INPUT));
-    EventBus.on('cell:conflict', () => this.playSound(SoundType.ERROR));
-    EventBus.on('game:complete', () => this.playSound(SoundType.COMPLETE));
-    EventBus.on('hint:used', () => this.playSound(SoundType.HINT));
-    EventBus.on('history:undo', () => this.playSound(SoundType.UNDO));
-    EventBus.on('achievement:unlocked', () => this.playSound(SoundType.ACHIEVEMENT));
+    this.eventBus.on('cell:input', () => this.playSound(SoundType.INPUT));
+    this.eventBus.on('cell:conflict', () => this.playSound(SoundType.ERROR));
+    this.eventBus.on('game:complete', () => this.playSound(SoundType.COMPLETE));
+    this.eventBus.on('hint:used', () => this.playSound(SoundType.HINT));
+    this.eventBus.on('history:undo', () => this.playSound(SoundType.UNDO));
+    this.eventBus.on('achievement:unlocked', () => this.playSound(SoundType.ACHIEVEMENT));
   }
 
   /**

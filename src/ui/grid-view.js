@@ -97,7 +97,7 @@ export class GridView {
    */
   createCell(row, col) {
     const cell = document.createElement('div');
-    cell.className = 'cell';
+    cell.className = 'sudoku-cell';
     cell.dataset.row = row;
     cell.dataset.col = col;
     cell.dataset.index = row * 9 + col;
@@ -149,7 +149,7 @@ export class GridView {
    * @private
    */
   handleCellClick(event) {
-    const cell = event.target.closest('.cell');
+    const cell = event.target.closest('.sudoku-cell');
     if (!cell) return;
     
     const row = parseInt(cell.dataset.row);
@@ -166,7 +166,7 @@ export class GridView {
    */
   handleTouchStart(event) {
     const touch = event.touches[0];
-    const cell = document.elementFromPoint(touch.clientX, touch.clientY)?.closest('.cell');
+    const cell = document.elementFromPoint(touch.clientX, touch.clientY)?.closest('.sudoku-cell');
     
     if (!cell) return;
     

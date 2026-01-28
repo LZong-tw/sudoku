@@ -257,7 +257,10 @@ class SudokuApp {
     this.eventBus.on('keypad_input', (data) => {
       if (this.gameController) {
         const { row, col } = this.gameController.state.selectedCell || {};
-        if (row != null && col != null && this.gameController.state.noteMode) {
+        const grid = this.gameController.getGrid();
+        const hasValue = grid && row != null && col != null && grid.getValue(row, col);
+        
+        if (row != null && col != null && this.gameController.state.noteMode && !hasValue) {
           this.gameController.toggleNote(row, col, data.value);
         } else {
           this.gameController.inputNumber(data.value);
@@ -271,6 +274,7 @@ class SudokuApp {
     this.eventBus.on(Events.SETTINGS_CHANGED, (data) => {
       if (this.gameController && data.noteMode !== undefined) {
         this.gameController.state.noteMode = data.noteMode;
+        this.showNotesModeIndicator(data.noteMode);
       }
     });
 
@@ -278,12 +282,6 @@ class SudokuApp {
     this.eventBus.on(Events.VALUE_CHANGED, () => {
       this.updateGridView();
       this.updateInfoPanel();
-    });
-
-    this.eventBus.on(Events.CELL_SELECTED, (data) => {
-      if (this.gameController) {
-        this.gameController.selectCell(data.row, data.col);
-      }
     });
 
     this.eventBus.on(Events.UNDO, () => {
@@ -485,6 +483,21 @@ class SudokuApp {
   }
 
   /**
+   * Show notes mode indicator
+   */
+  showNotesModeIndicator(enabled) {
+    let indicator = document.getElementById('notes-indicator');
+    if (!indicator) {
+      indicator = document.createElement('div');
+      indicator.id = 'notes-indicator';
+      indicator.className = 'notes-indicator';
+      document.querySelector('.sudoku-app')?.appendChild(indicator);
+    }
+    indicator.textContent = enabled ? '✏️ 筆記模式' : '';
+    indicator.classList.toggle('active', enabled);
+  }
+
+  /**
    * Show modal message
    */
   showModal(message) {
@@ -509,9 +522,18 @@ class SudokuApp {
   handleKeyboard(e) {
     if (!this.gameController) return;
     
+    const { row, col } = this.gameController.state.selectedCell || {};
+    const grid = this.gameController.getGrid();
+    const hasValue = grid && row != null && col != null && grid.getValue(row, col);
+    
     // Numbers 1-9
     if (e.key >= '1' && e.key <= '9') {
-      this.gameController.inputNumber(parseInt(e.key));
+      const num = parseInt(e.key);
+      if (this.gameController.state.noteMode && !hasValue && row != null) {
+        this.gameController.toggleNote(row, col, num);
+      } else {
+        this.gameController.inputNumber(num);
+      }
       this.updateGridView();
       this.updateInfoPanel();
     }

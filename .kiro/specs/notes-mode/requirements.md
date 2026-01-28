@@ -20,6 +20,7 @@ Defines requirements for the notes/pencil mark feature.
   - Notes display as 3x3 grid of small numbers in cell
   - Notes cleared when actual value entered
   - noteMode state syncs between keypad and gameController
+  - Cannot add notes to cell that already has a value
 
 ### REQ-NOTES-003: Mobile Guidance
 - **Description**: Help text for mobile users (no hover tooltips)

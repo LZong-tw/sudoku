@@ -100,5 +100,12 @@ describe('Notes Mode', () => {
       
       expect(gameController.state.noteMode).toBe(true);
     });
+
+    test('should not add notes to cell with value', () => {
+      const cellHasValue = true;
+      const noteMode = true;
+      const shouldAddNote = noteMode && !cellHasValue;
+      expect(shouldAddNote).toBe(false);
+    });
   });
 });

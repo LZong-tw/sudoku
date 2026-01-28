@@ -147,9 +147,9 @@ export class GameController {
       // Initialize hint system
       this.state.hintSystem = new HintSystem(this.state.grid);
       
-      // Initialize timer
+      // Initialize timer (don't start yet - wait for first input)
       this.state.timer = new Timer();
-      this.state.timer.start();
+      this.state.timerStarted = false;
       
       // Reset game state
       this.state.mode = mode;
@@ -266,6 +266,12 @@ export class GameController {
     // Check if cell is fixed
     if (this.state.grid.isFixed(row, col)) {
       return;
+    }
+    
+    // Start timer on first input
+    if (!this.state.timerStarted && this.state.timer) {
+      this.state.timer.start();
+      this.state.timerStarted = true;
     }
     
     try {

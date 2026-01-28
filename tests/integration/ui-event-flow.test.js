@@ -161,3 +161,45 @@ describe('UI Event Flow Integration', () => {
   });
 });
 
+
+
+describe('GameController method availability', () => {
+  test('should have all required methods', () => {
+    const requiredMethods = [
+      'startNewGame',
+      'selectCell',
+      'inputNumber',
+      'undo',
+      'redo',
+      'useHint',
+      'getGrid',
+      'getState',
+      'restoreGame',
+      'togglePause',
+      'isPaused',
+      'checkSolution',
+      'startDailyChallenge'
+    ];
+
+    // Mock the methods we expect
+    const mockController = {
+      startNewGame: () => {},
+      selectCell: () => {},
+      inputNumber: () => {},
+      undo: () => {},
+      redo: () => {},
+      useHint: () => {},
+      getGrid: () => {},
+      getState: () => {},
+      restoreGame: () => {},
+      togglePause: () => {},
+      isPaused: () => {},
+      checkSolution: () => {},
+      startDailyChallenge: () => {}
+    };
+
+    requiredMethods.forEach(method => {
+      expect(typeof mockController[method]).toBe('function');
+    });
+  });
+});

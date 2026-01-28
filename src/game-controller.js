@@ -918,7 +918,47 @@ export class GameController {
       this.eventBus.emit('game_resumed', {});
     }
   }
-  
+
+  /**
+   * Toggle pause state
+   */
+  togglePause() {
+    if (this.state.status === GameStatus.PAUSED) {
+      this.resumeGame();
+    } else if (this.state.status === GameStatus.PLAYING) {
+      this.pauseGame();
+    }
+  }
+
+  /**
+   * Check if game is paused
+   * @returns {boolean}
+   */
+  isPaused() {
+    return this.state.status === GameStatus.PAUSED;
+  }
+
+  /**
+   * Check solution - validate all user inputs
+   */
+  checkSolution() {
+    if (!this.grid) return;
+    
+    const results = [];
+    for (let row = 0; row < 9; row++) {
+      for (let col = 0; col < 9; col++) {
+        const cell = this.grid.getCell(row, col);
+        if (!cell.isFixed && cell.value) {
+          const isCorrect = cell.value === this.grid.solution[row][col];
+          results.push({ row, col, isCorrect });
+        }
+      }
+    }
+    
+    this.eventBus.emit('solution_checked', { results });
+    return results;
+  }
+
   /**
    * Get current game state
    * 

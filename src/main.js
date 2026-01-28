@@ -25,6 +25,8 @@ class SudokuApp {
     this.gameController = null;
     this.themeManager = null;
     this.ui = {};
+    this.timerInterval = null;
+    this.keyboardHandler = null;
   }
 
   /**
@@ -32,8 +34,6 @@ class SudokuApp {
    */
   async init() {
     try {
-      console.log('Initializing Sudoku application...');
-      
       // Initialize error handler first
       ErrorHandler.init();
       
@@ -74,7 +74,8 @@ class SudokuApp {
       }, 1000);
       
       // Keyboard input
-      document.addEventListener('keydown', (e) => this.handleKeyboard(e));
+      this.keyboardHandler = (e) => this.handleKeyboard(e);
+      document.addEventListener('keydown', this.keyboardHandler);
       
       // Load saved settings
       this.loadSettings();
@@ -86,7 +87,7 @@ class SudokuApp {
         }, 100);
       }
       
-      console.log('Sudoku application initialized successfully');
+      // Sudoku application initialized
     } catch (error) {
       ErrorHandler.handle(error, 'Failed to initialize application');
     }
@@ -261,7 +262,6 @@ class SudokuApp {
 
     // Game completed
     this.eventBus.on('game_completed', (data) => {
-      console.log('game_completed event received', data);
       this.updateGridView();
       setTimeout(() => {
         this.showModal('🎉 恭喜！數獨完成！');
@@ -666,6 +666,22 @@ class SudokuApp {
       this.gameController.selectCell(row, col);
       this.updateGridView();
     }
+  }
+
+  /**
+   * Cleanup resources
+   */
+  destroy() {
+    if (this.timerInterval) {
+      clearInterval(this.timerInterval);
+      this.timerInterval = null;
+    }
+    if (this.keyboardHandler) {
+      document.removeEventListener('keydown', this.keyboardHandler);
+      this.keyboardHandler = null;
+    }
+    Object.values(this.ui).forEach(component => component?.destroy?.());
+    this.eventBus?.clear();
   }
 }
 

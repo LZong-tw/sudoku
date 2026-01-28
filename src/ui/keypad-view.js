@@ -168,16 +168,8 @@ export class KeypadView {
    * @private
    */
   attachEventListeners() {
-    // Click/touch events for buttons
+    // Click events for buttons
     this.keypadElement.addEventListener('click', this.handleButtonClick.bind(this));
-    
-    // Touch events for mobile optimization (Requirement 10.3)
-    this.keypadElement.addEventListener('touchstart', this.handleTouchStart.bind(this), { passive: true });
-    
-    // Prevent double-tap zoom on mobile (Requirement 10.4)
-    this.keypadElement.addEventListener('touchend', (e) => {
-      e.preventDefault();
-    });
   }
 
   /**

@@ -234,12 +234,12 @@ body {
 /* Desktop: 數字一排(9個)，工具一排(5個) */
 @media (min-width: 601px) {
   .keypad {
-    max-width: 420px;
+    max-width: 470px;
   }
   
   .keypad-button {
-    width: 42px;
-    height: 42px;
+    width: 46px;
+    height: 46px;
   }
 }
 

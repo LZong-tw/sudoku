@@ -23,6 +23,8 @@ Defines layout structure and responsive behavior for optimal UX on desktop and m
   - Mobile: min(90vw, 360px)
   - Maintains 1:1 aspect ratio
   - 9x9 cells with 2px gap
+  - Cells maintain square shape (aspect-ratio: 1)
+  - Empty cells same size as filled cells
 
 ### REQ-LAYOUT-003: Responsive Breakpoints
 - **Description**: Layout adapts to screen size

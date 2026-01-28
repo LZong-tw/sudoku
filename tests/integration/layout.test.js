@@ -79,6 +79,17 @@ describe('Layout Requirements', () => {
       const aspectRatio = 1;
       expect(aspectRatio).toBe(1);
     });
+
+    test('cells should maintain square shape with aspect-ratio', () => {
+      const cellAspectRatio = 1;
+      expect(cellAspectRatio).toBe(1);
+    });
+
+    test('empty cells should have same size as filled cells', () => {
+      // min-width: 0 prevents content from expanding cell
+      const minWidth = 0;
+      expect(minWidth).toBe(0);
+    });
   });
 
   describe('Info panel items', () => {

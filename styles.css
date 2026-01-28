@@ -134,6 +134,8 @@ body {
   cursor: pointer;
   transition: all 0.15s;
   user-select: none;
+  aspect-ratio: 1;
+  min-width: 0;
 }
 
 /* 3x3 box borders */

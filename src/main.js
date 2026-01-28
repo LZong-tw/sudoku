@@ -245,7 +245,8 @@ class SudokuApp {
     });
 
     // Game completed
-    this.eventBus.on('game_completed', () => {
+    this.eventBus.on('game_completed', (data) => {
+      console.log('game_completed event received', data);
       this.updateGridView();
       setTimeout(() => {
         this.showModal('🎉 恭喜！數獨完成！');

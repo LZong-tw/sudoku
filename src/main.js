@@ -85,7 +85,15 @@ class SudokuApp {
     app.innerHTML = `
       <div class="sudoku-app">
         <!-- Header -->
-        <h1 class="app-header">數獨遊戲</h1>
+        <div class="app-header">
+          <h1 class="app-title">數獨遊戲</h1>
+          <div class="header-buttons">
+            <button id="daily-challenge-btn" class="header-btn" title="每日挑戰">📅</button>
+            <button id="achievements-btn" class="header-btn" title="成就">🏆</button>
+            <button id="statistics-btn" class="header-btn" title="統計">📊</button>
+            <button id="settings-btn" class="header-btn" title="設定">⚙️</button>
+          </div>
+        </div>
         
         <!-- Screen reader announcements -->
         <div id="sr-announcements" class="sr-only" role="status" aria-live="assertive" aria-atomic="true"></div>

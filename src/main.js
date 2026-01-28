@@ -51,7 +51,7 @@ class SudokuApp {
       this.initializeUIComponents();
       
       // Initialize game controller
-      this.gameController = new GameController(this.eventBus);
+      this.gameController = new GameController({ eventBus: this.eventBus });
       
       // Initialize sound manager (after game controller for storage access)
       this.soundManager = new SoundManager(this.gameController.storageManager, this.eventBus);

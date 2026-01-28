@@ -706,6 +706,7 @@ export class GameController {
    */
   handleGameCompletion() {
     // Check if the solution is correct
+    console.log('handleGameCompletion called, isCorrect:', this.state.grid.isCorrect());
     if (!this.state.grid.isCorrect()) {
       return;
     }
@@ -757,6 +758,7 @@ export class GameController {
     this.storageManager.remove('gameState');
     
     // Emit completion event (Requirement 11.2)
+    console.log('Emitting game_completed, eventBus:', this.eventBus);
     this.eventBus.emit(Events.GAME_COMPLETED, {
       difficulty: this.state.difficulty,
       time: completionTime,

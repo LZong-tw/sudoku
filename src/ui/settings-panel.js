@@ -93,7 +93,7 @@ export class SettingsPanel {
     
     const title = document.createElement('h2');
     title.id = 'settings-title';
-    title.textContent = '設置';
+    title.textContent = '設定';
     title.className = 'settings-title';
     
     const closeButton = document.createElement('button');
@@ -161,7 +161,7 @@ export class SettingsPanel {
     
     const resetButton = document.createElement('button');
     resetButton.className = 'settings-reset-button';
-    resetButton.textContent = '重置統計數據';
+    resetButton.textContent = '重置統計資料';
     resetButton.setAttribute('aria-label', 'Reset all statistics');
     resetButton.setAttribute('tabindex', '0');
     this.controls.resetButton = resetButton;
@@ -366,14 +366,14 @@ export class SettingsPanel {
    */
   handleResetStatistics() {
     // Show confirmation dialog
-    const confirmed = confirm('確定要重置所有統計數據嗎？此操作無法撤銷。');
+    const confirmed = confirm('確定要重置所有統計資料嗎？此操作無法撤銷。');
     
     if (confirmed) {
       // Emit reset statistics event
       this.eventBus.emit('reset_statistics');
       
       // Show success message
-      this.showMessage('統計數據已重置');
+      this.showMessage('統計資料已重置');
     }
   }
 

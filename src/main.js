@@ -214,6 +214,9 @@ class SudokuApp {
     });
 
     document.getElementById('settings-btn')?.addEventListener('click', () => {
+      // Sync current theme before showing
+      const currentTheme = this.themeManager?.getCurrentTheme() || 'dark';
+      this.ui.settingsPanel.updateSettings({ theme: currentTheme });
       this.ui.settingsPanel.show();
     });
 

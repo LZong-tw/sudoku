@@ -71,15 +71,22 @@ export class ThemeManager {
      */
     this.themes = {
       light: {
-        '--bg-color': '#f5f5f5',
-        '--text-color': '#1a1a2e',
+        '--bg-color': '#ffffff',
+        '--text-color': '#333333',
         '--cell-bg': '#ffffff',
-        '--cell-selected': '#4ecca3',
-        '--cell-highlighted': '#e8f5e9',
-        '--cell-error': '#e94560',
-        '--panel-bg': '#ffffff',
-        '--border-color': '#ddd',
-        '--accent-color': '#4ecca3'
+        '--cell-selected': '#bbdefb',
+        '--cell-highlighted': '#e3f2fd',
+        '--cell-error': '#ffcdd2',
+        '--panel-bg': '#f5f5f5',
+        '--border-color': '#cccccc',
+        '--accent-color': '#4a90e2',
+        '--btn-bg': '#4a90e2',
+        '--btn-text': '#ffffff',
+        '--btn-secondary-bg': '#e0e0e0',
+        '--btn-secondary-text': '#333333',
+        '--grid-bg': '#cccccc',
+        '--modal-bg': '#ffffff',
+        '--text-muted': '#666666'
       },
       dark: {
         '--bg-color': '#1a1a2e',
@@ -90,7 +97,14 @@ export class ThemeManager {
         '--cell-error': '#e94560',
         '--panel-bg': '#0f3460',
         '--border-color': '#233554',
-        '--accent-color': '#4ecca3'
+        '--accent-color': '#4ecca3',
+        '--btn-bg': '#4ecca3',
+        '--btn-text': '#1a1a2e',
+        '--btn-secondary-bg': '#16213e',
+        '--btn-secondary-text': '#eee',
+        '--grid-bg': '#0f3460',
+        '--modal-bg': '#16213e',
+        '--text-muted': '#888'
       }
     };
   }

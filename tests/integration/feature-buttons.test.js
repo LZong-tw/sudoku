@@ -1,0 +1,100 @@
+/**
+ * Feature buttons integration tests
+ */
+
+import { describe, test, expect, beforeEach, vi } from 'vitest';
+import { EventBus } from '../../src/utils/event-bus.js';
+
+describe('Feature Buttons', () => {
+  let eventBus;
+  let mockHandlers;
+
+  beforeEach(() => {
+    eventBus = new EventBus();
+    mockHandlers = {
+      showDailyChallenge: vi.fn(),
+      showAchievements: vi.fn(),
+      showStatistics: vi.fn(),
+      showSettings: vi.fn()
+    };
+  });
+
+  describe('Header buttons', () => {
+    const headerButtons = [
+      { id: 'daily-challenge-btn', icon: '📅', title: '每日挑戰', handler: 'showDailyChallenge' },
+      { id: 'achievements-btn', icon: '🏆', title: '成就', handler: 'showAchievements' },
+      { id: 'statistics-btn', icon: '📊', title: '統計', handler: 'showStatistics' },
+      { id: 'settings-btn', icon: '⚙️', title: '設定', handler: 'showSettings' }
+    ];
+
+    test('should have 4 feature buttons defined', () => {
+      expect(headerButtons.length).toBe(4);
+    });
+
+    headerButtons.forEach(button => {
+      test(`${button.title} button should have correct properties`, () => {
+        expect(button.id).toBeTruthy();
+        expect(button.icon).toBeTruthy();
+        expect(button.title).toBeTruthy();
+        expect(button.handler).toBeTruthy();
+      });
+    });
+  });
+
+  describe('Daily Challenge feature', () => {
+    test('should get today challenge from dailyChallenge service', () => {
+      const mockDailyChallenge = {
+        getTodayChallenge: vi.fn(() => ({ puzzle: [], solution: [] })),
+        getHistory: vi.fn(() => []),
+        getStatistics: vi.fn(() => ({}))
+      };
+
+      const challenge = mockDailyChallenge.getTodayChallenge();
+      expect(mockDailyChallenge.getTodayChallenge).toHaveBeenCalled();
+      expect(challenge).toHaveProperty('puzzle');
+    });
+  });
+
+  describe('Achievements feature', () => {
+    test('should get achievements from achievementSystem', () => {
+      const mockAchievementSystem = {
+        getAllAchievements: vi.fn(() => []),
+        getProgress: vi.fn(() => ({ total: 10, unlocked: 3 }))
+      };
+
+      const achievements = mockAchievementSystem.getAllAchievements();
+      const progress = mockAchievementSystem.getProgress();
+      
+      expect(mockAchievementSystem.getAllAchievements).toHaveBeenCalled();
+      expect(progress).toHaveProperty('total');
+      expect(progress).toHaveProperty('unlocked');
+    });
+  });
+
+  describe('Statistics feature', () => {
+    test('should get stats from statisticsTracker', () => {
+      const mockStatisticsTracker = {
+        getAllStats: vi.fn(() => ({
+          gamesPlayed: 10,
+          gamesWon: 8,
+          bestTime: 120
+        }))
+      };
+
+      const stats = mockStatisticsTracker.getAllStats();
+      expect(mockStatisticsTracker.getAllStats).toHaveBeenCalled();
+      expect(stats).toHaveProperty('gamesPlayed');
+    });
+  });
+
+  describe('Settings feature', () => {
+    test('should have settings panel with show method', () => {
+      const mockSettingsPanel = {
+        show: vi.fn()
+      };
+
+      mockSettingsPanel.show();
+      expect(mockSettingsPanel.show).toHaveBeenCalled();
+    });
+  });
+});

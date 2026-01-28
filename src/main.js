@@ -67,6 +67,11 @@ class SudokuApp {
       // Update grid view with initial state
       this.updateGridView();
       
+      // Start timer update interval
+      this.timerInterval = setInterval(() => {
+        this.updateInfoPanel();
+      }, 1000);
+      
       // Mobile: scroll to grid after load
       if (window.innerWidth < 600) {
         setTimeout(() => {
@@ -236,12 +241,19 @@ class SudokuApp {
       this.startDailyChallenge();
     });
 
-    // Keypad events
-    this.eventBus.on(Events.VALUE_CHANGED, (data) => {
+    // Keypad number input
+    this.eventBus.on('keypad_input', (data) => {
       if (this.gameController) {
         this.gameController.inputNumber(data.value);
         this.updateGridView();
+        this.updateInfoPanel();
       }
+    });
+
+    // Game state changed (from gameController)
+    this.eventBus.on(Events.VALUE_CHANGED, () => {
+      this.updateGridView();
+      this.updateInfoPanel();
     });
 
     this.eventBus.on(Events.CELL_SELECTED, (data) => {
@@ -335,7 +347,30 @@ class SudokuApp {
     if (this.gameController && this.ui.gridView) {
       const grid = this.gameController.getGrid();
       if (grid) {
-        this.ui.gridView.updateGrid(grid);
+        // Build grid data with validation
+        const current = [];
+        const fixed = new Set();
+        const notes = [];
+        const errors = new Set();
+        
+        for (let r = 0; r < 9; r++) {
+          current[r] = [];
+          notes[r] = [];
+          for (let c = 0; c < 9; c++) {
+            const value = grid.getValue(r, c);
+            current[r][c] = value;
+            notes[r][c] = grid.getNotes(r, c);
+            if (grid.isFixed(r, c)) {
+              fixed.add(`${r},${c}`);
+            }
+            // Check if value is wrong
+            if (value && !grid.isFixed(r, c) && grid.solution && value !== grid.solution[r][c]) {
+              errors.add(`${r},${c}`);
+            }
+          }
+        }
+        
+        this.ui.gridView.updateGrid({ current, fixed, notes, errors });
       }
     }
   }
@@ -353,6 +388,28 @@ class SudokuApp {
       
       const errorsDisplay = document.getElementById('errors-display');
       if (errorsDisplay) errorsDisplay.textContent = state.errors || 0;
+      
+      // Update timer
+      const timerDisplay = document.getElementById('timer-display');
+      if (timerDisplay && state.timer) {
+        const seconds = state.timer.getElapsedSeconds ? state.timer.getElapsedSeconds() : 0;
+        const mins = Math.floor(seconds / 60);
+        const secs = seconds % 60;
+        timerDisplay.textContent = `${String(mins).padStart(2, '0')}:${String(secs).padStart(2, '0')}`;
+      }
+      
+      // Update progress
+      const progressDisplay = document.getElementById('progress-display');
+      if (progressDisplay && this.gameController.getGrid()) {
+        const grid = this.gameController.getGrid();
+        let filled = 0;
+        for (let r = 0; r < 9; r++) {
+          for (let c = 0; c < 9; c++) {
+            if (grid.getValue(r, c)) filled++;
+          }
+        }
+        progressDisplay.textContent = Math.round(filled / 81 * 100) + '%';
+      }
     }
   }
 

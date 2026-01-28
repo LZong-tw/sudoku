@@ -309,20 +309,22 @@ export class GridView {
    * @param {Set<string>} [gridData.hints] - Set of hint cell positions
    */
   updateGrid(gridData) {
-    const { current, fixed, notes, hints = new Set() } = gridData;
+    const { current, fixed, notes, hints = new Set(), errors = new Set() } = gridData;
     
     this.cells.forEach(cell => {
       const row = parseInt(cell.dataset.row);
       const col = parseInt(cell.dataset.col);
       const value = current[row][col];
       const cellKey = `${row},${col}`;
-      const isFixed = fixed.has(cellKey);
-      const isHint = hints.has(cellKey);
+      const isFixed = fixed.has(`${row},${col}`);
+      const isHint = hints.has ? hints.has(`${row},${col}`) : false;
+      const isError = errors.has(`${row},${col}`);
       const cellNotes = notes[row][col];
       
       // Update cell classes
       cell.classList.toggle('fixed', isFixed);
       cell.classList.toggle('hint', isHint);
+      cell.classList.toggle('invalid', isError);
       
       // Update cell value or notes
       const valueContainer = cell.querySelector('.cell-value');

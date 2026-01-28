@@ -231,13 +231,8 @@ export class KeypadView {
    * @private
    */
   handleNumberInput(number) {
-    if (this.noteMode) {
-      // Emit note toggle event (Requirement 3.2)
-      this.eventBus.emit(Events.NOTE_TOGGLED, { value: number });
-    } else {
-      // Emit value change event
-      this.eventBus.emit(Events.VALUE_CHANGED, { value: number });
-    }
+    // Emit keypad input event
+    this.eventBus.emit('keypad_input', { value: number });
   }
 
   /**

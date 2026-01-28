@@ -241,6 +241,14 @@ class SudokuApp {
       this.startDailyChallenge();
     });
 
+    // Game completed
+    this.eventBus.on('game_completed', () => {
+      this.updateGridView();
+      setTimeout(() => {
+        alert('🎉 恭喜！數獨完成！');
+      }, 100);
+    });
+
     // Keypad number input
     this.eventBus.on('keypad_input', (data) => {
       if (this.gameController) {
@@ -337,6 +345,8 @@ class SudokuApp {
       const select = document.getElementById('difficulty-select');
       const difficulty = select ? select.value : 'easy';
       this.gameController.startNewGame(difficulty);
+      this.updateGridView();
+      this.updateInfoPanel();
     }
   }
 
@@ -440,7 +450,21 @@ class SudokuApp {
    */
   checkSolution() {
     if (this.gameController) {
-      this.gameController.checkSolution();
+      const results = this.gameController.checkSolution();
+      this.updateGridView();
+      
+      // Show feedback
+      if (results && results.length > 0) {
+        const correct = results.filter(r => r.isCorrect).length;
+        const wrong = results.filter(r => !r.isCorrect).length;
+        if (wrong === 0) {
+          alert(`✅ 全部正確！(${correct} 格)`);
+        } else {
+          alert(`❌ 有 ${wrong} 格錯誤`);
+        }
+      } else {
+        alert('請先填入一些數字');
+      }
     }
   }
 }

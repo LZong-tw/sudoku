@@ -67,6 +67,13 @@ class SudokuApp {
       // Update grid view with initial state
       this.updateGridView();
       
+      // Mobile: scroll to grid after load
+      if (window.innerWidth < 600) {
+        setTimeout(() => {
+          document.getElementById('grid-container')?.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        }, 100);
+      }
+      
       console.log('Sudoku application initialized successfully');
     } catch (error) {
       ErrorHandler.handle(error, 'Failed to initialize application');

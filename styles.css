@@ -233,6 +233,19 @@ body {
   color: #1a1a2e;
 }
 
+/* Mobile: 7 buttons per row */
+@media (max-width: 600px) {
+  .keypad {
+    max-width: 100%;
+  }
+  
+  .keypad-button {
+    width: calc((100% - 24px) / 7);
+    padding: 10px 0;
+    font-size: 15px;
+  }
+}
+
 /* Help text */
 .keypad-help {
   margin-top: 10px;

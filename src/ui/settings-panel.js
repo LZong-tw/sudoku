@@ -132,7 +132,7 @@ export class SettingsPanel {
     // Highlight same numbers toggle (Requirement 9.2)
     content.appendChild(this.createToggleControl(
       'highlightSameNumbers',
-      '高亮相同數字',
+      '標示相同數字',
       'Highlight cells with the same number',
       this.settings.highlightSameNumbers
     ));

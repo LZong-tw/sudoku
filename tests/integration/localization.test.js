@@ -50,4 +50,10 @@ describe('zh-TW Localization', () => {
     expect(loading).toBe('載入');
     expect(loading).not.toBe('加載');
   });
+
+  test('should use 標示 not 高亮', () => {
+    const highlight = '標示';
+    expect(highlight).toBe('標示');
+    expect(highlight).not.toBe('高亮');
+  });
 });

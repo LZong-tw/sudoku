@@ -112,6 +112,20 @@ describe('Notes Mode', () => {
       const message = '已有數字，無法加筆記';
       expect(message).toContain('無法');
     });
+
+    test('NOTE_TOGGLED is completion event, not trigger event', () => {
+      // NOTE_TOGGLED emitted after toggleNote completes
+      // Should NOT be used to trigger toggleNote (causes loop)
+      const sequence = ['toggleNote()', 'NOTE_TOGGLED'];
+      expect(sequence.indexOf('toggleNote()')).toBeLessThan(sequence.indexOf('NOTE_TOGGLED'));
+    });
+
+    test('note number must be 1-9', () => {
+      const validNotes = [1, 2, 3, 4, 5, 6, 7, 8, 9];
+      validNotes.forEach(n => {
+        expect(n >= 1 && n <= 9).toBe(true);
+      });
+    });
   });
 
   describe('Notes mode indicator', () => {

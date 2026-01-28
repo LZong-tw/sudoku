@@ -21,6 +21,8 @@ Defines requirements for the notes/pencil mark feature.
   - Notes cleared when actual value entered
   - noteMode state syncs between keypad and gameController
   - Cannot add notes to cell that already has a value
+  - Note number must be 1-9
+  - NOTE_TOGGLED is completion event (not trigger event)
 
 ### REQ-NOTES-003: Mobile Guidance
 - **Description**: Help text for mobile users (no hover tooltips)

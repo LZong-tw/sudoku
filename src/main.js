@@ -257,6 +257,16 @@ class SudokuApp {
       }
     });
 
+    this.eventBus.on(Events.NOTE_TOGGLED, (data) => {
+      if (this.gameController) {
+        const { row, col } = this.gameController.state.selectedCell || {};
+        if (row != null && col != null) {
+          this.gameController.toggleNote(row, col, data.value);
+          this.updateGridView();
+        }
+      }
+    });
+
     this.eventBus.on(Events.HINT_USED, () => {
       if (this.gameController) {
         this.gameController.useHint();

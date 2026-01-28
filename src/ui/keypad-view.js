@@ -85,13 +85,16 @@ export class KeypadView {
     this.keypadElement.appendChild(deleteBtn);
     
     // Add control buttons
-    const undoBtn = this.createControlButton('undo', '復原', '↶');
-    const redoBtn = this.createControlButton('redo', '重做', '↷');
-    const hintBtn = this.createControlButton('hint', '提示', '💡');
+    const undoBtn = this.createControlButton('undo', '復原 (Ctrl+Z)', '↶');
+    const redoBtn = this.createControlButton('redo', '重做 (Ctrl+Y)', '↷');
+    const hintBtn = this.createControlButton('hint', '提示：顯示正確答案', '💡');
+    const notesBtn = this.createControlButton('notes', '筆記模式：標記候選數字', '✏️');
+    notesBtn.id = 'notes-btn';
     
     this.keypadElement.appendChild(undoBtn);
     this.keypadElement.appendChild(redoBtn);
     this.keypadElement.appendChild(hintBtn);
+    this.keypadElement.appendChild(notesBtn);
     
     this.container.appendChild(this.keypadElement);
   }

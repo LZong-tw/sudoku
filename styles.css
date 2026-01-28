@@ -228,6 +228,11 @@ body {
   background: #233554;
 }
 
+.keypad-control.active {
+  background: #4ecca3;
+  color: #1a1a2e;
+}
+
 /* Desktop: compact layout */
 @media (min-width: 768px) {
   .sudoku-app {

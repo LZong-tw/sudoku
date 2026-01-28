@@ -311,6 +311,16 @@ class SudokuApp {
         if (data.soundEnabled !== undefined && this.soundManager) {
           data.soundEnabled ? this.soundManager.enable() : this.soundManager.disable();
         }
+        // Show timer
+        if (data.showTimer !== undefined) {
+          const timerItem = document.getElementById('timer-display')?.parentElement;
+          if (timerItem) timerItem.style.display = data.showTimer ? '' : 'none';
+        }
+        // Show errors
+        if (data.showErrors !== undefined) {
+          const errorsItem = document.getElementById('errors-display')?.parentElement;
+          if (errorsItem) errorsItem.style.display = data.showErrors ? '' : 'none';
+        }
         // Save settings
         this.saveSettings(data);
       }
@@ -501,6 +511,16 @@ class SudokuApp {
       // Apply sound
       if (saved.soundEnabled !== undefined && this.soundManager) {
         saved.soundEnabled ? this.soundManager.enable() : this.soundManager.disable();
+      }
+      
+      // Apply show/hide
+      if (saved.showTimer === false) {
+        const timerItem = document.getElementById('timer-display')?.parentElement;
+        if (timerItem) timerItem.style.display = 'none';
+      }
+      if (saved.showErrors === false) {
+        const errorsItem = document.getElementById('errors-display')?.parentElement;
+        if (errorsItem) errorsItem.style.display = 'none';
       }
       
       // Update settings panel

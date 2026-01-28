@@ -233,6 +233,20 @@ body {
   color: #1a1a2e;
 }
 
+/* Help text */
+.keypad-help {
+  margin-top: 10px;
+  font-size: 12px;
+  color: #888;
+  text-align: center;
+}
+
+@media (min-width: 768px) {
+  .keypad-help {
+    display: none; /* Hide on desktop, use tooltips */
+  }
+}
+
 /* Desktop: compact layout */
 @media (min-width: 768px) {
   .sudoku-app {

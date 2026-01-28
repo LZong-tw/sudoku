@@ -96,7 +96,12 @@ export class KeypadView {
     this.keypadElement.appendChild(hintBtn);
     this.keypadElement.appendChild(notesBtn);
     
+    // Add help text for mobile
+    const helpText = document.createElement('div');
+    helpText.className = 'keypad-help';
+    helpText.innerHTML = '✏️ 筆記模式：點擊切換，可在格子標記多個候選數字';
     this.container.appendChild(this.keypadElement);
+    this.container.appendChild(helpText);
   }
 
   /**
@@ -138,6 +143,7 @@ export class KeypadView {
     button.className = 'keypad-button keypad-control';
     button.dataset.action = action;
     button.innerHTML = content;
+    button.title = label; // Tooltip for desktop
     
     // ARIA attributes for accessibility (Requirement 17.1)
     button.setAttribute('role', 'button');

@@ -493,7 +493,7 @@ export class GridView {
       const isConflict = this.conflictCells.has(cellKey);
       const isSameNumber = this.sameNumberCells.has(cellKey);
       
-      cell.classList.toggle('highlight', isHighlighted);
+      cell.classList.toggle('highlighted', isHighlighted);
       cell.classList.toggle('conflict', isConflict);
       cell.classList.toggle('same-number', isSameNumber);
     });

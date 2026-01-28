@@ -58,8 +58,7 @@ export class KeypadView {
   /**
    * Renders the keypad HTML structure
    * 
-   * Creates number buttons (1-9) and control buttons
-   * (undo, redo, hint, notes mode, clear)
+   * Creates number buttons (1-9) and delete button
    */
   render() {
     // Clear container
@@ -71,47 +70,21 @@ export class KeypadView {
     this.keypadElement.setAttribute('role', 'toolbar');
     this.keypadElement.setAttribute('aria-label', 'Sudoku input keypad');
     
-    // Create number buttons section
-    const numberSection = document.createElement('div');
-    numberSection.className = 'keypad-numbers';
-    numberSection.setAttribute('role', 'group');
-    numberSection.setAttribute('aria-label', 'Number buttons');
-    
-    // Create number buttons (1-9)
+    // Create number buttons (1-9) + delete
     this.numberButtons = [];
     for (let i = 1; i <= 9; i++) {
       const button = this.createNumberButton(i);
       this.numberButtons.push(button);
-      numberSection.appendChild(button);
+      this.keypadElement.appendChild(button);
     }
     
-    this.keypadElement.appendChild(numberSection);
+    // Add delete button
+    const deleteBtn = this.createNumberButton(0);
+    deleteBtn.innerHTML = '⌫';
+    deleteBtn.setAttribute('aria-label', 'Delete');
+    this.keypadElement.appendChild(deleteBtn);
     
-    // Create control buttons section
-    const controlSection = document.createElement('div');
-    controlSection.className = 'keypad-controls';
-    controlSection.setAttribute('role', 'group');
-    controlSection.setAttribute('aria-label', 'Control buttons');
-    
-    // Create control buttons
-    this.controlButtons = {
-      undo: this.createControlButton('undo', 'Undo', '↶'),
-      redo: this.createControlButton('redo', 'Redo', '↷'),
-      hint: this.createControlButton('hint', 'Hint', '💡'),
-      notes: this.createControlButton('notes', 'Notes Mode', '✏️'),
-      clear: this.createControlButton('clear', 'Clear Cell', '×')
-    };
-    
-    // Append control buttons
-    Object.values(this.controlButtons).forEach(button => {
-      controlSection.appendChild(button);
-    });
-    
-    this.keypadElement.appendChild(controlSection);
     this.container.appendChild(this.keypadElement);
-    
-    // Initialize button states
-    this.updateButtonStates();
   }
 
   /**

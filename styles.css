@@ -1,4 +1,4 @@
-/* Sudoku Game - Based on working sudoku.html styles */
+/* Sudoku Game - Matching sudoku.html design */
 * { box-sizing: border-box; margin: 0; padding: 0; }
 
 body {
@@ -50,66 +50,44 @@ body {
 
 /* Header */
 .app-header {
-  width: 100%;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  background: #16213e;
-  padding: 15px 20px;
-  border-radius: 10px;
+  color: #4ecca3;
+  font-size: 28px;
+  margin-bottom: 10px;
 }
 
 .app-title {
-  color: #4ecca3;
-  font-size: 24px;
   margin: 0;
 }
 
 .app-header-controls {
+  display: none; /* Hide for now, match old version */
+}
+
+/* Container - side by side layout */
+.game-container {
   display: flex;
-  gap: 8px;
-}
-
-.header-btn {
-  background: transparent;
-  border: none;
-  padding: 8px;
-  font-size: 20px;
-  cursor: pointer;
-  border-radius: 6px;
-  transition: background 0.2s;
-}
-
-.header-btn:hover {
-  background: #0f3460;
-}
-
-/* Game Info Panel */
-.game-info-panel {
-  display: flex;
-  gap: 20px;
   flex-wrap: wrap;
+  gap: 20px;
   justify-content: center;
+  align-items: flex-start;
+}
+
+/* Info Panel */
+.game-info-panel {
   background: #16213e;
-  padding: 12px 20px;
+  padding: 15px;
   border-radius: 10px;
+  min-width: 200px;
 }
 
 .info-item {
+  margin: 10px 0;
   display: flex;
-  gap: 8px;
+  justify-content: space-between;
 }
 
-.info-label { color: #888; }
+.info-label { color: #eee; }
 .info-value { color: #4ecca3; font-weight: bold; }
-
-/* Main Game Area */
-.game-main {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 15px;
-}
 
 /* Grid */
 .grid-container {
@@ -145,22 +123,53 @@ body {
 .sudoku-cell:nth-child(n+19):nth-child(-n+27),
 .sudoku-cell:nth-child(n+46):nth-child(-n+54) { border-bottom: 2px solid #0f3460; }
 
+/* Cell states */
 .sudoku-cell.selected { background: #4ecca3; color: #1a1a2e; transform: scale(1.05); }
 .sudoku-cell.highlighted { background: #233554; }
 .sudoku-cell.fixed { color: #888; }
+.sudoku-cell.valid { animation: pop 0.2s; }
+.sudoku-cell.invalid { background: #e94560; animation: shake 0.3s; }
 .sudoku-cell.error { background: #e94560; }
+.sudoku-cell.complete { background: #2d6a4f; }
 .sudoku-cell.same-value { background: #2d4a3e; }
 
 @keyframes pop { 50% { transform: scale(1.2); } }
 @keyframes shake { 25%, 75% { transform: translateX(-3px); } 50% { transform: translateX(3px); } }
 
-.sudoku-cell.valid { animation: pop 0.2s; }
-.sudoku-cell.invalid { animation: shake 0.3s; }
-
-/* Keypad */
-.keypad-container {
+/* Buttons */
+.game-controls {
+  margin-top: 20px;
   display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
   justify-content: center;
+}
+
+.control-btn, .difficulty-select {
+  background: #4ecca3;
+  color: #1a1a2e;
+  border: none;
+  padding: 12px 24px;
+  border-radius: 8px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: transform 0.1s, opacity 0.1s;
+}
+
+.control-btn:hover {
+  opacity: 0.9;
+  transform: translateY(-2px);
+}
+
+.difficulty-select {
+  background: #16213e;
+  color: #eee;
+  border: 1px solid #4ecca3;
+}
+
+/* Numpad */
+.keypad-container {
+  margin-top: 15px;
 }
 
 .keypad {
@@ -169,57 +178,41 @@ body {
   gap: 5px;
 }
 
-.keypad-btn {
+.keypad-numbers {
+  display: contents;
+}
+
+.keypad-controls {
+  display: contents;
+}
+
+.keypad-button {
   background: #4ecca3;
   color: #1a1a2e;
   border: none;
-  padding: 15px 20px;
+  padding: 15px;
   border-radius: 8px;
   font-size: 18px;
   font-weight: bold;
   cursor: pointer;
   transition: transform 0.1s, opacity 0.1s;
+  min-width: 44px;
+  min-height: 44px;
 }
 
-.keypad-btn:hover {
+.keypad-button:hover {
   opacity: 0.9;
   transform: translateY(-2px);
 }
 
-.keypad-btn.tool-btn {
-  background: #16213e;
-  color: #eee;
-  font-size: 16px;
-}
-
-.keypad-btn.tool-btn:hover {
-  background: #233554;
-}
-
-/* Game Controls */
-.game-controls {
-  display: flex;
-  gap: 10px;
-  flex-wrap: wrap;
-  justify-content: center;
-  margin-top: 10px;
-}
-
-.control-btn {
+.keypad-control {
   background: #4ecca3;
   color: #1a1a2e;
-  border: none;
-  padding: 12px 24px;
-  border-radius: 8px;
-  font-size: 16px;
-  font-weight: bold;
-  cursor: pointer;
-  transition: transform 0.1s, opacity 0.1s;
 }
 
-.control-btn:hover {
-  opacity: 0.9;
-  transform: translateY(-2px);
+/* Main game area */
+.game-main {
+  display: contents;
 }
 
 /* Screen reader only */

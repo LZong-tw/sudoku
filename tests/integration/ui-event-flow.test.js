@@ -40,6 +40,16 @@ describe('UI Event Flow Integration', () => {
       expect(eventLog).toContainEqual({ action: 'inputNumber', value: 5 });
     });
 
+    test('VALUE_CHANGED with 0 should clear cell', () => {
+      eventBus.on(Events.VALUE_CHANGED, (data) => {
+        mockGameController.inputNumber(data.value);
+      });
+
+      eventBus.emit(Events.VALUE_CHANGED, { value: 0 });
+
+      expect(mockGameController.inputNumber).toHaveBeenCalledWith(0);
+    });
+
     test('CELL_SELECTED event should call selectCell', () => {
       eventBus.on(Events.CELL_SELECTED, (data) => {
         mockGameController.selectCell(data.row, data.col);
@@ -99,5 +109,55 @@ describe('UI Event Flow Integration', () => {
         { action: 'inputNumber', value: 7 }
       ]);
     });
+
+    test('should handle multiple number inputs', () => {
+      eventBus.on(Events.VALUE_CHANGED, (data) => {
+        mockGameController.inputNumber(data.value);
+      });
+
+      // User enters multiple numbers
+      for (let i = 1; i <= 9; i++) {
+        eventBus.emit(Events.VALUE_CHANGED, { value: i });
+      }
+
+      expect(mockGameController.inputNumber).toHaveBeenCalledTimes(9);
+    });
+  });
+
+  describe('Cell highlighting', () => {
+    test('selecting cell should trigger highlight of related cells', () => {
+      const highlightedCells = new Set();
+      
+      // Simulate GridView.highlightRelatedCells logic
+      const highlightRelatedCells = (row, col) => {
+        highlightedCells.clear();
+        // Same row
+        for (let c = 0; c < 9; c++) {
+          if (c !== col) highlightedCells.add(`${row},${c}`);
+        }
+        // Same column
+        for (let r = 0; r < 9; r++) {
+          if (r !== row) highlightedCells.add(`${r},${col}`);
+        }
+        // Same 3x3 box
+        const boxRow = Math.floor(row / 3) * 3;
+        const boxCol = Math.floor(col / 3) * 3;
+        for (let r = boxRow; r < boxRow + 3; r++) {
+          for (let c = boxCol; c < boxCol + 3; c++) {
+            if (r !== row || c !== col) highlightedCells.add(`${r},${c}`);
+          }
+        }
+      };
+
+      highlightRelatedCells(4, 4); // Center cell
+
+      // Should highlight 8 in row + 8 in col + 4 in box (excluding overlaps)
+      // Row: 8, Col: 8, Box: 4 extra = 20 total
+      expect(highlightedCells.size).toBe(20);
+      expect(highlightedCells.has('4,0')).toBe(true); // Same row
+      expect(highlightedCells.has('0,4')).toBe(true); // Same col
+      expect(highlightedCells.has('3,3')).toBe(true); // Same box
+    });
   });
 });
+

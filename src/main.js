@@ -85,68 +85,50 @@ class SudokuApp {
     app.innerHTML = `
       <div class="sudoku-app">
         <!-- Header -->
-        <header class="app-header">
-          <h1 class="app-title">數獨遊戲</h1>
-          <div class="app-header-controls">
-            <button id="daily-challenge-btn" class="header-btn" aria-label="Daily Challenge">
-              📅
-            </button>
-            <button id="achievements-btn" class="header-btn" aria-label="Achievements">
-              🏆
-            </button>
-            <button id="statistics-btn" class="header-btn" aria-label="Statistics">
-              📊
-            </button>
-            <button id="settings-btn" class="header-btn" aria-label="Settings">
-              ⚙️
-            </button>
-          </div>
-        </header>
-
-        <!-- Game Info Panel -->
-        <div class="game-info-panel" role="status" aria-live="polite">
-          <div class="info-item">
-            <span class="info-label">難度：</span>
-            <span id="difficulty-display" class="info-value" aria-label="Difficulty">中等</span>
-          </div>
-          <div class="info-item">
-            <span class="info-label">時間：</span>
-            <span id="timer-display" class="info-value" aria-label="Time elapsed">00:00</span>
-          </div>
-          <div class="info-item">
-            <span class="info-label">錯誤：</span>
-            <span id="errors-display" class="info-value" aria-label="Errors">0</span>
-          </div>
-          <div class="info-item">
-            <span class="info-label">提示：</span>
-            <span id="hints-display" class="info-value" aria-label="Hints used">0</span>
-          </div>
-        </div>
+        <h1 class="app-header">數獨遊戲</h1>
         
-        <!-- Screen reader announcements (Requirement 17.3, 17.4) -->
+        <!-- Screen reader announcements -->
         <div id="sr-announcements" class="sr-only" role="status" aria-live="assertive" aria-atomic="true"></div>
 
-        <!-- Main Game Area -->
-        <main class="game-main">
+        <!-- Container: Info + Grid side by side -->
+        <div class="game-container">
+          <!-- Game Info Panel -->
+          <div class="game-info-panel" role="status" aria-live="polite">
+            <div class="info-item">
+              <span class="info-label">難度</span>
+              <span id="difficulty-display" class="info-value">簡單</span>
+            </div>
+            <div class="info-item">
+              <span class="info-label">時間</span>
+              <span id="timer-display" class="info-value">00:00</span>
+            </div>
+            <div class="info-item">
+              <span class="info-label">錯誤</span>
+              <span id="errors-display" class="info-value">0</span>
+            </div>
+            <div class="info-item">
+              <span class="info-label">進度</span>
+              <span id="progress-display" class="info-value">0%</span>
+            </div>
+          </div>
+
           <!-- Grid Container -->
           <div id="grid-container" class="grid-container"></div>
-
-          <!-- Keypad Container -->
-          <div id="keypad-container" class="keypad-container"></div>
-        </main>
+        </div>
 
         <!-- Game Controls -->
         <div class="game-controls">
-          <button id="new-game-btn" class="control-btn">
-            新遊戲
-          </button>
-          <button id="pause-btn" class="control-btn">
-            暫停
-          </button>
-          <button id="check-btn" class="control-btn">
-            檢查
-          </button>
+          <select id="difficulty-select" class="difficulty-select">
+            <option value="easy">簡單</option>
+            <option value="medium">中等</option>
+            <option value="hard">困難</option>
+          </select>
+          <button id="new-game-btn" class="control-btn">新遊戲</button>
+          <button id="check-btn" class="control-btn">檢查</button>
         </div>
+
+        <!-- Keypad Container -->
+        <div id="keypad-container" class="keypad-container"></div>
 
         <!-- Modal Containers -->
         <div id="settings-container"></div>
@@ -217,10 +199,6 @@ class SudokuApp {
       this.startNewGame();
     });
 
-    document.getElementById('pause-btn')?.addEventListener('click', () => {
-      this.togglePause();
-    });
-
     document.getElementById('check-btn')?.addEventListener('click', () => {
       this.checkSolution();
     });
@@ -232,6 +210,7 @@ class SudokuApp {
 
     this.eventBus.on('game_started', () => {
       this.updateGridView();
+      this.updateInfoPanel();
     });
 
     this.eventBus.on('view_statistics_requested', () => {
@@ -318,11 +297,9 @@ class SudokuApp {
    */
   startNewGame() {
     if (this.gameController) {
-      // Show difficulty selection dialog
-      const difficulty = prompt('選擇難度 (easy/medium/hard):', 'medium');
-      if (difficulty && ['easy', 'medium', 'hard'].includes(difficulty)) {
-        this.gameController.startNewGame(difficulty);
-      }
+      const select = document.getElementById('difficulty-select');
+      const difficulty = select ? select.value : 'easy';
+      this.gameController.startNewGame(difficulty);
     }
   }
 
@@ -335,6 +312,22 @@ class SudokuApp {
       if (grid) {
         this.ui.gridView.updateGrid(grid);
       }
+    }
+  }
+
+  /**
+   * Update info panel with current game state
+   */
+  updateInfoPanel() {
+    if (this.gameController) {
+      const state = this.gameController.getState();
+      const difficultyMap = { easy: '簡單', medium: '中等', hard: '困難' };
+      
+      const diffDisplay = document.getElementById('difficulty-display');
+      if (diffDisplay) diffDisplay.textContent = difficultyMap[state.difficulty] || state.difficulty;
+      
+      const errorsDisplay = document.getElementById('errors-display');
+      if (errorsDisplay) errorsDisplay.textContent = state.errors || 0;
     }
   }
 

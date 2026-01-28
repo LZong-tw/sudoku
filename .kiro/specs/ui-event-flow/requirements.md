@@ -1,7 +1,7 @@
 # UI Event Flow Requirements
 
 ## Overview
-Defines requirements for event-driven communication between UI components and game logic.
+Defines requirements for event-driven communication between UI components and game logic, matching the design of sudoku.html.
 
 ## Requirements
 
@@ -12,42 +12,39 @@ Defines requirements for event-driven communication between UI components and ga
   - Clicking number button emits VALUE_CHANGED event with correct value
   - GameController receives and processes the input
   - Grid view updates to show the new number
+  - Delete button (⌫) clears the cell
 
-### REQ-UI-002: Cell Selection
-- **Description**: When user clicks a grid cell, it should become selected and highlighted
+### REQ-UI-002: Cell Selection with Visual Feedback
+- **Description**: When user clicks a grid cell, it should become selected with visual highlighting
 - **Event Flow**: GridView → CELL_SELECTED event → GameController.selectCell()
 - **Acceptance Criteria**:
-  - Clicking cell emits CELL_SELECTED event with row/col
-  - Selected cell has visual highlight (background color change)
-  - Related cells (same row/col/box) have secondary highlight
+  - Selected cell has green background (#4ecca3) and scale(1.05)
+  - Related cells (same row/col/box) have highlight background (#233554)
+  - Fixed cells (preset numbers) cannot be selected for editing
 
-### REQ-UI-003: Undo/Redo Actions
-- **Description**: Undo and redo buttons should revert/replay user actions
-- **Event Flow**: KeypadView → UNDO/REDO event → GameController.undo()/redo() → GridView.updateGrid()
+### REQ-UI-003: Input Validation Feedback
+- **Description**: Immediate visual feedback when entering numbers
 - **Acceptance Criteria**:
-  - Undo button emits UNDO event
-  - Redo button emits REDO event
-  - Grid updates after undo/redo
+  - Correct input: pop animation
+  - Wrong input: red background (#e94560) + shake animation + error count increment
 
-### REQ-UI-004: Hint System
-- **Description**: Hint button should reveal a correct number for the selected cell
-- **Event Flow**: KeypadView → HINT_USED event → GameController.useHint() → GridView.updateGrid()
+### REQ-UI-004: Game Info Panel
+- **Description**: Display game status information
 - **Acceptance Criteria**:
-  - Hint button emits HINT_USED event
-  - Hint counter increments
-  - Correct value appears in selected cell
+  - Shows: Difficulty, Time, Errors, Progress
+  - Timer updates every second
+  - Progress shows percentage of filled cells
 
-### REQ-UI-005: CSS Class Consistency
+### REQ-UI-005: Layout Structure
+- **Description**: UI layout matching sudoku.html
+- **Acceptance Criteria**:
+  - Title at top
+  - Info panel and grid side by side (flex wrap)
+  - Controls below (difficulty select, new game, check)
+  - Numpad at bottom (5 columns: 1-5, 6-9, ⌫)
+
+### REQ-UI-006: CSS Class Consistency
 - **Description**: CSS class names must match between JS and CSS files
 - **Acceptance Criteria**:
-  - Grid cells use `.sudoku-cell` class (not `.cell`)
-  - Grid container uses `.sudoku-grid` class
-  - Keypad buttons use `.keypad-btn` class
-
-### REQ-UI-006: Grid Layout
-- **Description**: Grid should be centered and properly sized
-- **Acceptance Criteria**:
-  - Grid is horizontally centered
-  - Grid width is responsive: `min(90vw, 400px)`
-  - Grid maintains 1:1 aspect ratio
-  - 3x3 box borders are visible
+  - Grid cells use `.sudoku-cell` class
+  - States: `.selected`, `.highlighted`, `.fixed`, `.valid`, `.invalid`, `.complete`

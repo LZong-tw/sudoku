@@ -262,6 +262,7 @@ export class GridView {
     
     this.selectedCell = { row, col };
     this.updateSelection();
+    this.highlightRelatedCells(row, col);
     
     // Emit selection event
     this.eventBus.emit(Events.CELL_SELECTED, { row, col });

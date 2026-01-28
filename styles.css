@@ -196,14 +196,13 @@ body {
   flex-wrap: wrap;
   gap: 4px;
   justify-content: center;
-  max-width: 360px;
 }
 
 .keypad-button {
   background: #4ecca3;
   color: #1a1a2e;
   border: none;
-  padding: 12px;
+  padding: 10px;
   border-radius: 8px;
   font-size: 16px;
   font-weight: bold;
@@ -211,7 +210,6 @@ body {
   transition: transform 0.1s, opacity 0.1s;
   min-width: 40px;
   min-height: 40px;
-  width: 48px;
 }
 
 .keypad-button:hover {
@@ -233,10 +231,23 @@ body {
   color: #1a1a2e;
 }
 
-/* Mobile: 7 buttons per row */
+/* Desktop: 數字一排(9個)，工具一排(5個) */
+@media (min-width: 601px) {
+  .keypad {
+    max-width: 420px;
+  }
+  
+  .keypad-button {
+    width: 42px;
+    height: 42px;
+  }
+}
+
+/* Mobile: 緊湊排列 */
 @media (max-width: 600px) {
   .keypad {
     max-width: 100%;
+    padding: 0 10px;
   }
   
   .keypad-button {

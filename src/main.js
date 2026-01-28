@@ -44,8 +44,9 @@ class SudokuApp {
       // Create UI structure
       this.createUIStructure();
       
-      // Initialize theme manager
-      this.themeManager = new ThemeManager(this.eventBus);
+      // Initialize theme manager (with null storage, we handle persistence ourselves)
+      this.themeManager = new ThemeManager(null, this.eventBus);
+      this.themeManager.setTheme('dark'); // Default theme
       
       // Initialize UI components
       this.initializeUIComponents();
@@ -74,6 +75,9 @@ class SudokuApp {
       
       // Keyboard input
       document.addEventListener('keydown', (e) => this.handleKeyboard(e));
+      
+      // Load saved settings
+      this.loadSettings();
       
       // Mobile: scroll to grid after load
       if (window.innerWidth < 600) {
@@ -243,6 +247,7 @@ class SudokuApp {
     this.eventBus.on(Events.THEME_CHANGED, (data) => {
       if (this.themeManager && data.theme) {
         this.themeManager.setTheme(data.theme);
+        this.saveSettings({ theme: data.theme });
       }
     });
 
@@ -306,6 +311,8 @@ class SudokuApp {
         if (data.soundEnabled !== undefined && this.soundManager) {
           data.soundEnabled ? this.soundManager.enable() : this.soundManager.disable();
         }
+        // Save settings
+        this.saveSettings(data);
       }
     });
 
@@ -457,6 +464,51 @@ class SudokuApp {
         }
         progressDisplay.textContent = Math.round(filled / 81 * 100) + '%';
       }
+    }
+  }
+
+  /**
+   * Save settings to localStorage
+   */
+  saveSettings(data) {
+    try {
+      const saved = JSON.parse(localStorage.getItem('sudoku_settings') || '{}');
+      const updated = { ...saved, ...data };
+      localStorage.setItem('sudoku_settings', JSON.stringify(updated));
+    } catch (e) {
+      console.warn('Failed to save settings:', e);
+    }
+  }
+
+  /**
+   * Load settings from localStorage
+   */
+  loadSettings() {
+    try {
+      const saved = JSON.parse(localStorage.getItem('sudoku_settings') || '{}');
+      
+      // Apply theme
+      if (saved.theme && this.themeManager) {
+        this.themeManager.setTheme(saved.theme);
+      }
+      
+      // Apply other settings
+      if (this.gameController) {
+        if (saved.autoCheck !== undefined) this.gameController.state.autoCheck = saved.autoCheck;
+        if (saved.highlightSameNumbers !== undefined) this.gameController.state.highlightSameNumbers = saved.highlightSameNumbers;
+      }
+      
+      // Apply sound
+      if (saved.soundEnabled !== undefined && this.soundManager) {
+        saved.soundEnabled ? this.soundManager.enable() : this.soundManager.disable();
+      }
+      
+      // Update settings panel
+      if (this.ui.settingsPanel) {
+        this.ui.settingsPanel.updateSettings(saved);
+      }
+    } catch (e) {
+      console.warn('Failed to load settings:', e);
     }
   }
 

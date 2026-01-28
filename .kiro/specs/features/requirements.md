@@ -60,3 +60,27 @@ Defines requirements for the advanced feature buttons in the header.
   - Consistent border radius (16px)
   - Max width 400px, max height 80vh
   - Scrollable content area
+
+### REQ-FEAT-007: Daily Challenge Styling
+- **Description**: Modern styling for daily challenge view
+- **Acceptance Criteria**:
+  - Card with gradient background
+  - Completed card has green border
+  - Difficulty badges (easy/medium/hard colors)
+  - Primary button with gradient
+  - Statistics grid (3 columns)
+  - Calendar grid (7 columns for week)
+
+### REQ-FEAT-008: Statistics Styling
+- **Description**: Modern styling for statistics view
+- **Acceptance Criteria**:
+  - Cards with icon, value, label
+  - Compact grid (2 columns) for difficulty stats
+  - Section titles uppercase with letter-spacing
+
+### REQ-FEAT-009: Achievement Styling
+- **Description**: Modern styling for achievement view
+- **Acceptance Criteria**:
+  - Progress bar with container
+  - Cards with icon and content
+  - Locked achievements have reduced opacity

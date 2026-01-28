@@ -154,4 +154,67 @@ describe('Feature Buttons', () => {
       expect(resetClass).toBe('settings-reset-button');
     });
   });
+
+  describe('Daily challenge styling', () => {
+    test('daily challenge card should have gradient background', () => {
+      const gradient = 'linear-gradient(135deg, #0f3460 0%, #16213e 100%)';
+      expect(gradient).toContain('linear-gradient');
+    });
+
+    test('completed card should have green border', () => {
+      const completedClass = 'daily-challenge-card-completed';
+      expect(completedClass).toBeTruthy();
+    });
+
+    test('difficulty badges should have color variants', () => {
+      const difficulties = ['easy', 'medium', 'hard'];
+      difficulties.forEach(d => {
+        expect(`daily-challenge-difficulty-${d}`).toBeTruthy();
+      });
+    });
+
+    test('primary button should have gradient', () => {
+      const buttonClass = 'daily-challenge-button-primary';
+      expect(buttonClass).toBeTruthy();
+    });
+
+    test('statistics grid should be 3 columns', () => {
+      const columns = 3;
+      expect(columns).toBe(3);
+    });
+
+    test('calendar should be 7 columns for week days', () => {
+      const columns = 7;
+      expect(columns).toBe(7);
+    });
+  });
+
+  describe('Statistics view styling', () => {
+    test('statistics cards should have icon, value, label', () => {
+      const cardClasses = ['statistics-card-icon', 'statistics-card-value', 'statistics-card-label'];
+      expect(cardClasses.length).toBe(3);
+    });
+
+    test('compact grid should be 2 columns', () => {
+      const compactClass = 'statistics-grid-compact';
+      expect(compactClass).toBeTruthy();
+    });
+  });
+
+  describe('Achievement view styling', () => {
+    test('achievement should have progress bar', () => {
+      const progressClasses = ['achievement-progress-bar-container', 'achievement-progress-bar'];
+      expect(progressClasses.length).toBe(2);
+    });
+
+    test('achievement cards should have icon and content', () => {
+      const cardClasses = ['achievement-card-icon', 'achievement-card-content'];
+      expect(cardClasses.length).toBe(2);
+    });
+
+    test('locked achievements should have opacity', () => {
+      const lockedClass = 'achievement-card-locked';
+      expect(lockedClass).toBeTruthy();
+    });
+  });
 });

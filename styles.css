@@ -54,32 +54,58 @@ body {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 10px;
+  margin-bottom: 16px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid #233554;
 }
 
 .app-title {
   color: #4ecca3;
   font-size: 24px;
   margin: 0;
+  font-weight: 600;
 }
 
 .header-buttons {
   display: flex;
-  gap: 8px;
+  gap: 6px;
 }
 
 .header-btn {
-  background: #16213e;
-  border: none;
-  padding: 8px 12px;
+  background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+  border: 1px solid #233554;
+  padding: 10px 14px;
   font-size: 18px;
   cursor: pointer;
-  border-radius: 6px;
-  transition: background 0.2s;
+  border-radius: 12px;
+  transition: all 0.2s;
+  position: relative;
 }
 
 .header-btn:hover {
-  background: #233554;
+  background: linear-gradient(135deg, #233554 0%, #1a1a2e 100%);
+  border-color: #4ecca3;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(78, 204, 163, 0.2);
+}
+
+.header-btn:active {
+  transform: translateY(0);
+}
+
+.header-btn[title]:hover::after {
+  content: attr(title);
+  position: absolute;
+  bottom: -32px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: #1a1a2e;
+  color: #eee;
+  padding: 4px 8px;
+  border-radius: 4px;
+  font-size: 12px;
+  white-space: nowrap;
+  z-index: 10;
 }
 
 /* Container - side by side layout */

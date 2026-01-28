@@ -247,7 +247,7 @@ export class KeypadView {
       
       case 'hint':
         // Emit hint event
-        this.eventBus.emit(Events.HINT_USED);
+        this.eventBus.emit('hint_requested');
         break;
       
       case 'notes':

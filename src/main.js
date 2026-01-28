@@ -298,7 +298,7 @@ class SudokuApp {
       }
     });
 
-    this.eventBus.on(Events.HINT_USED, () => {
+    this.eventBus.on('hint_requested', () => {
       if (this.gameController) {
         this.gameController.useHint();
         this.updateGridView();

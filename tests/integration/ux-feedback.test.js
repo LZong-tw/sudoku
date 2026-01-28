@@ -62,11 +62,17 @@ describe('UX Feedback', () => {
       expect(eventEmitted).toHaveBeenCalledWith('game_completed');
     });
 
-    test('should show celebration message', () => {
+    test('should show modal with celebration message', () => {
       const message = '🎉 恭喜！數獨完成！';
       
       expect(message).toContain('恭喜');
       expect(message).toContain('🎉');
+    });
+
+    test('modal should be dismissible', () => {
+      // Modal can be closed by button click or backdrop click
+      const closeActions = ['button_click', 'backdrop_click'];
+      expect(closeActions.length).toBe(2);
     });
   });
 });

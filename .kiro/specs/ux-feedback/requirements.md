@@ -23,6 +23,7 @@ Defines requirements for user experience feedback on game actions.
 ### REQ-UX-003: Game Complete Celebration
 - **Description**: User receives celebration when puzzle completed
 - **Acceptance Criteria**:
-  - Alert shown with 🎉 emoji
+  - Modal shown with 🎉 emoji
   - Message in Chinese (恭喜)
   - Triggered by game_completed event
+  - Dismissible by button or backdrop click

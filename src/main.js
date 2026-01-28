@@ -248,7 +248,7 @@ class SudokuApp {
     this.eventBus.on('game_completed', () => {
       this.updateGridView();
       setTimeout(() => {
-        alert('🎉 恭喜！數獨完成！');
+        this.showModal('🎉 恭喜！數獨完成！');
       }, 100);
     });
 
@@ -461,13 +461,32 @@ class SudokuApp {
         const correct = results.filter(r => r.isCorrect).length;
         const wrong = results.filter(r => !r.isCorrect).length;
         if (wrong === 0) {
-          alert(`✅ 全部正確！(${correct} 格)`);
+          this.showModal(`✅ 全部正確！(${correct} 格)`);
         } else {
-          alert(`❌ 有 ${wrong} 格錯誤`);
+          this.showModal(`❌ 有 ${wrong} 格錯誤`);
         }
       } else {
-        alert('請先填入一些數字');
+        this.showModal('請先填入一些數字');
       }
+    }
+  }
+
+  /**
+   * Show modal message
+   */
+  showModal(message) {
+    const modal = document.getElementById('modal');
+    const msg = document.getElementById('modal-message');
+    const btn = document.getElementById('modal-close');
+    if (modal && msg) {
+      msg.textContent = message;
+      modal.classList.remove('hidden');
+      btn?.focus();
+      const close = () => modal.classList.add('hidden');
+      btn?.addEventListener('click', close, { once: true });
+      modal.addEventListener('click', (e) => {
+        if (e.target === modal) close();
+      }, { once: true });
     }
   }
 

@@ -17,7 +17,8 @@ describe('zh-TW Localization', () => {
 
   const zhCN = {
     settings: '設置',
-    statistics: '統計數據'
+    statistics: '統計數據',
+    loading: '加載'
   };
 
   test('should use 設定 not 設置', () => {
@@ -42,5 +43,11 @@ describe('zh-TW Localization', () => {
     expect(zhTW.difficulty.easy).toBe('簡單');
     expect(zhTW.difficulty.medium).toBe('中等');
     expect(zhTW.difficulty.hard).toBe('困難');
+  });
+
+  test('should use 載入 not 加載', () => {
+    const loading = '載入';
+    expect(loading).toBe('載入');
+    expect(loading).not.toBe('加載');
   });
 });

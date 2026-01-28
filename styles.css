@@ -728,41 +728,72 @@ body {
 }
 
 /* Settings specific */
-.settings-item {
+.settings-panel {
+  background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+  border-radius: 16px;
+  width: 90%;
+  max-width: 400px;
+  max-height: 80vh;
+  overflow: hidden;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+  border: 1px solid #233554;
+}
+
+.settings-control {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 12px 0;
+  padding: 14px 0;
   border-bottom: 1px solid #233554;
 }
 
-.settings-item:last-child {
+.settings-control:last-child {
   border-bottom: none;
 }
 
 .settings-label {
   color: #eee;
+  font-size: 15px;
 }
 
-.settings-toggle {
+.settings-select-wrapper {
+  position: relative;
+}
+
+.settings-select {
+  background: #0f3460;
+  color: #eee;
+  border: 1px solid #233554;
+  padding: 8px 12px;
+  border-radius: 6px;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+.settings-checkbox-wrapper {
+  position: relative;
+}
+
+.settings-checkbox {
+  display: none;
+}
+
+.settings-checkbox-label {
   width: 48px;
-  height: 24px;
+  height: 26px;
   background: #233554;
-  border-radius: 12px;
+  border-radius: 13px;
   position: relative;
   cursor: pointer;
+  display: block;
   transition: background 0.2s;
 }
 
-.settings-toggle.active {
-  background: #4ecca3;
-}
-
-.settings-toggle::after {
+.settings-checkbox-label::after {
   content: '';
   position: absolute;
-  width: 20px;
-  height: 20px;
+  width: 22px;
+  height: 22px;
   background: #fff;
   border-radius: 50%;
   top: 2px;
@@ -770,6 +801,26 @@ body {
   transition: transform 0.2s;
 }
 
-.settings-toggle.active::after {
-  transform: translateX(24px);
+.settings-checkbox:checked + .settings-checkbox-label {
+  background: #4ecca3;
+}
+
+.settings-checkbox:checked + .settings-checkbox-label::after {
+  transform: translateX(22px);
+}
+
+.settings-reset-button {
+  background: #e94560;
+  color: #fff;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 8px;
+  font-size: 14px;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.settings-reset-button:hover {
+  background: #d63850;
+  transform: translateY(-2px);
 }

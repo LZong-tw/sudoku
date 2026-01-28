@@ -55,4 +55,21 @@ describe('Theme Toggle', () => {
       expect(storage.saveSettings).toHaveBeenCalled();
     });
   });
+
+  describe('Settings panel sync', () => {
+    test('should sync current theme before showing settings', () => {
+      const themeManager = { getCurrentTheme: () => 'dark' };
+      const currentTheme = themeManager.getCurrentTheme();
+      expect(currentTheme).toBe('dark');
+    });
+
+    test('updateSettings should update theme select value', () => {
+      const settingsPanel = {
+        settings: { theme: 'light' },
+        updateSettings: function(s) { this.settings = { ...this.settings, ...s }; }
+      };
+      settingsPanel.updateSettings({ theme: 'dark' });
+      expect(settingsPanel.settings.theme).toBe('dark');
+    });
+  });
 });

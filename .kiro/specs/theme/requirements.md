@@ -35,3 +35,10 @@ Defines requirements for the theme toggle feature.
 - **Acceptance Criteria**:
   - Theme saved on change
   - Theme restored on page load
+
+### REQ-THEME-005: Settings Panel Sync
+- **Description**: Settings panel shows current theme
+- **Acceptance Criteria**:
+  - Get current theme from themeManager before showing
+  - Update settings panel with current theme
+  - Select dropdown reflects actual theme

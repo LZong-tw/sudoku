@@ -5,7 +5,7 @@ BUCKET="sudokustack-sudokubucket36098364-srfkqwiydxtg"
 DISTRIBUTION_ID="E2ECPVPI4K69FJ"
 
 echo "Deploying Sudoku to S3..."
-aws s3 sync . s3://$BUCKET --delete --exclude ".git/*" --exclude "node_modules/*" --exclude "*.sh"
+aws s3 sync . s3://$BUCKET --delete --exact-timestamps --exclude ".git/*" --exclude "node_modules/*" --exclude "*.sh"
 
 echo "Setting default root object..."
 aws cloudfront update-distribution --id $DISTRIBUTION_ID --default-root-object index.html > /dev/null

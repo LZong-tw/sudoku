@@ -234,7 +234,7 @@ export class SoundManager {
   enable() {
     this.enabled = true;
     this.savePreferences();
-    EventBus.emit('sound:enabled');
+    this.eventBus?.emit('sound:enabled');
   }
 
   /**
@@ -243,7 +243,7 @@ export class SoundManager {
   disable() {
     this.enabled = false;
     this.savePreferences();
-    EventBus.emit('sound:disabled');
+    this.eventBus?.emit('sound:disabled');
   }
 
   /**

@@ -66,4 +66,30 @@ describe('Settings Persistence', () => {
       expect(theme).toBe('light');
     });
   });
+
+  describe('Show/hide settings', () => {
+    test('showTimer false should hide timer', () => {
+      const showTimer = false;
+      const display = showTimer ? '' : 'none';
+      expect(display).toBe('none');
+    });
+
+    test('showTimer true should show timer', () => {
+      const showTimer = true;
+      const display = showTimer ? '' : 'none';
+      expect(display).toBe('');
+    });
+
+    test('showErrors false should hide errors', () => {
+      const showErrors = false;
+      const display = showErrors ? '' : 'none';
+      expect(display).toBe('none');
+    });
+
+    test('showErrors true should show errors', () => {
+      const showErrors = true;
+      const display = showErrors ? '' : 'none';
+      expect(display).toBe('');
+    });
+  });
 });

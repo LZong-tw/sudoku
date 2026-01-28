@@ -26,3 +26,11 @@ Defines requirements for settings persistence.
   - Save theme on THEME_CHANGED event
   - Restore theme on app load
   - Settings panel shows correct theme
+
+### REQ-PERSIST-004: Show/Hide Settings
+- **Description**: Timer and errors visibility persists
+- **Acceptance Criteria**:
+  - showTimer: hide/show timer display
+  - showErrors: hide/show errors display
+  - Apply on settings change
+  - Restore on app load

@@ -47,3 +47,14 @@ Defines requirements for the advanced feature buttons in the header.
   - Sound on/off toggle
   - Auto-check toggle
   - Highlight same numbers toggle
+
+
+### REQ-FEAT-006: Modal Styling
+- **Description**: Consistent modern styling for all feature modals
+- **Acceptance Criteria**:
+  - Glassmorphism overlay (blur + dark background)
+  - Gradient background on modal content
+  - Close button in header (× icon)
+  - Consistent border radius (16px)
+  - Max width 400px, max height 80vh
+  - Scrollable content area

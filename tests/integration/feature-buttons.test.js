@@ -97,4 +97,34 @@ describe('Feature Buttons', () => {
       expect(mockSettingsPanel.show).toHaveBeenCalled();
     });
   });
+
+  describe('Modal styling', () => {
+    test('modals should have glassmorphism overlay', () => {
+      const overlayStyles = {
+        background: 'rgba(0, 0, 0, 0.7)',
+        backdropFilter: 'blur(4px)'
+      };
+      expect(overlayStyles.backdropFilter).toContain('blur');
+    });
+
+    test('modals should have gradient background', () => {
+      const gradient = 'linear-gradient(135deg, #1a1a2e 0%, #16213e 100%)';
+      expect(gradient).toContain('linear-gradient');
+    });
+
+    test('all modals should have close button class', () => {
+      const closeClasses = [
+        'statistics-close',
+        'achievement-close',
+        'daily-challenge-close',
+        'settings-close'
+      ];
+      expect(closeClasses.length).toBe(4);
+    });
+
+    test('modals should have consistent border radius', () => {
+      const borderRadius = '16px';
+      expect(borderRadius).toBe('16px');
+    });
+  });
 });

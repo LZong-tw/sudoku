@@ -494,3 +494,282 @@ body {
 .modal-content button:hover {
   background: #357abd;
 }
+
+/* Feature Modals (Statistics, Achievements, Daily Challenge, Settings) */
+.statistics-overlay,
+.achievement-overlay,
+.daily-challenge-overlay,
+.settings-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.7);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  backdrop-filter: blur(4px);
+}
+
+.statistics-view,
+.achievement-view,
+.daily-challenge-view,
+.settings-view {
+  background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+  border-radius: 16px;
+  width: 90%;
+  max-width: 400px;
+  max-height: 80vh;
+  overflow: hidden;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+  border: 1px solid #233554;
+}
+
+.statistics-header,
+.achievement-header,
+.daily-challenge-header,
+.settings-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px 20px;
+  border-bottom: 1px solid #233554;
+}
+
+.statistics-title,
+.achievement-title,
+.daily-challenge-title,
+.settings-title {
+  margin: 0;
+  font-size: 20px;
+  color: #4ecca3;
+}
+
+.statistics-close,
+.achievement-close,
+.daily-challenge-close,
+.settings-close {
+  background: none;
+  border: none;
+  color: #888;
+  font-size: 28px;
+  cursor: pointer;
+  padding: 0;
+  line-height: 1;
+  transition: color 0.2s;
+}
+
+.statistics-close:hover,
+.achievement-close:hover,
+.daily-challenge-close:hover,
+.settings-close:hover {
+  color: #e94560;
+}
+
+.statistics-content,
+.achievement-content,
+.daily-challenge-content,
+.settings-content {
+  padding: 20px;
+  overflow-y: auto;
+  max-height: 50vh;
+}
+
+.statistics-section,
+.achievement-section {
+  margin-bottom: 20px;
+}
+
+.statistics-section-title,
+.achievement-section-title {
+  font-size: 14px;
+  color: #888;
+  margin: 0 0 12px 0;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.statistics-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 12px;
+}
+
+.statistics-item,
+.achievement-item {
+  background: #0f3460;
+  padding: 12px;
+  border-radius: 8px;
+  text-align: center;
+}
+
+.statistics-value {
+  font-size: 24px;
+  font-weight: bold;
+  color: #4ecca3;
+}
+
+.statistics-label {
+  font-size: 12px;
+  color: #888;
+  margin-top: 4px;
+}
+
+.statistics-footer,
+.achievement-footer,
+.daily-challenge-footer,
+.settings-footer {
+  padding: 16px 20px;
+  border-top: 1px solid #233554;
+  display: flex;
+  justify-content: center;
+}
+
+.statistics-button,
+.achievement-button,
+.daily-challenge-button,
+.settings-button {
+  background: #4ecca3;
+  color: #1a1a2e;
+  border: none;
+  padding: 12px 32px;
+  border-radius: 8px;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.statistics-button:hover,
+.achievement-button:hover,
+.daily-challenge-button:hover,
+.settings-button:hover {
+  background: #3db892;
+  transform: translateY(-2px);
+}
+
+/* Achievement specific */
+.achievement-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  text-align: left;
+}
+
+.achievement-icon {
+  font-size: 32px;
+}
+
+.achievement-info {
+  flex: 1;
+}
+
+.achievement-name {
+  font-weight: bold;
+  color: #eee;
+}
+
+.achievement-desc {
+  font-size: 12px;
+  color: #888;
+}
+
+.achievement-item.locked {
+  opacity: 0.5;
+}
+
+/* Daily Challenge specific */
+.daily-challenge-today {
+  background: #0f3460;
+  padding: 20px;
+  border-radius: 12px;
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.daily-challenge-date {
+  font-size: 14px;
+  color: #888;
+  margin-bottom: 8px;
+}
+
+.daily-challenge-status {
+  font-size: 18px;
+  color: #4ecca3;
+}
+
+.daily-challenge-streak {
+  display: flex;
+  justify-content: center;
+  gap: 4px;
+  margin-top: 16px;
+}
+
+.streak-day {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: #233554;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 12px;
+}
+
+.streak-day.completed {
+  background: #4ecca3;
+  color: #1a1a2e;
+}
+
+.streak-day.today {
+  border: 2px solid #4ecca3;
+}
+
+/* Settings specific */
+.settings-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 0;
+  border-bottom: 1px solid #233554;
+}
+
+.settings-item:last-child {
+  border-bottom: none;
+}
+
+.settings-label {
+  color: #eee;
+}
+
+.settings-toggle {
+  width: 48px;
+  height: 24px;
+  background: #233554;
+  border-radius: 12px;
+  position: relative;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.settings-toggle.active {
+  background: #4ecca3;
+}
+
+.settings-toggle::after {
+  content: '';
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  background: #fff;
+  border-radius: 50%;
+  top: 2px;
+  left: 2px;
+  transition: transform 0.2s;
+}
+
+.settings-toggle.active::after {
+  transform: translateX(24px);
+}

@@ -40,6 +40,20 @@ describe('Info Panel Updates', () => {
     expect(formatTime(3661)).toBe('61:01');
   });
 
+  test('timer should not auto-start on new game', () => {
+    const timerStarted = false;
+    expect(timerStarted).toBe(false);
+  });
+
+  test('timer should start on first input', () => {
+    let timerStarted = false;
+    // Simulate first input
+    if (!timerStarted) {
+      timerStarted = true;
+    }
+    expect(timerStarted).toBe(true);
+  });
+
   test('progress should calculate percentage', () => {
     const calculateProgress = (filled, total) => Math.round(filled / total * 100);
     

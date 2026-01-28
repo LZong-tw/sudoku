@@ -27,6 +27,7 @@ Defines requirements for real-time answer validation and game info display.
   - Updates every second
   - Pauses when game paused
   - Resets on new game
+  - Starts on first input (not on new game)
 
 ### REQ-INFO-002: Progress Display
 - **Description**: Show completion percentage

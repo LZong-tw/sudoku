@@ -303,16 +303,6 @@ class SudokuApp {
       }
     });
 
-    this.eventBus.on(Events.NOTE_TOGGLED, (data) => {
-      if (this.gameController) {
-        const { row, col } = this.gameController.state.selectedCell || {};
-        if (row != null && col != null) {
-          this.gameController.toggleNote(row, col, data.value);
-          this.updateGridView();
-        }
-      }
-    });
-
     this.eventBus.on('hint_requested', () => {
       if (this.gameController) {
         this.gameController.useHint();
@@ -550,9 +540,9 @@ class SudokuApp {
     // Numbers 1-9
     if (e.key >= '1' && e.key <= '9') {
       const num = parseInt(e.key);
-      if (this.gameController.state.noteMode && !hasValue && row != null) {
+      if (this.gameController.state.noteMode && !hasValue && row != null && num >= 1 && num <= 9) {
         this.gameController.toggleNote(row, col, num);
-      } else {
+      } else if (!this.gameController.state.noteMode) {
         this.gameController.inputNumber(num);
       }
       this.updateGridView();

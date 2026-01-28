@@ -55,5 +55,14 @@ describe('zh-TW Localization', () => {
     const highlight = '標示';
     expect(highlight).toBe('標示');
     expect(highlight).not.toBe('高亮');
+    test('should use 提供 not 支持', () => {
+      const html = readFileSync('./index.html', 'utf-8');
+      expect(html).not.toContain('支持');
+    });
+
+    test('should use 復原 not 撤銷', () => {
+      const html = readFileSync('./index.html', 'utf-8');
+      expect(html).not.toContain('撤銷');
+    });
   });
 });

@@ -14,6 +14,7 @@ Defines requirements for Traditional Chinese (Taiwan) localization.
   - 重做 (not 恢復)
   - 載入 (not 加載)
   - 標示 (not 高亮)
+  - 提供 (not 支持)
 
 ### REQ-L10N-002: Difficulty Labels
 - **Description**: Difficulty names in zh-TW

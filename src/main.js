@@ -236,6 +236,13 @@ class SudokuApp {
       this.updateInfoPanel();
     });
 
+    // Theme change
+    this.eventBus.on(Events.THEME_CHANGED, (data) => {
+      if (this.themeManager && data.theme) {
+        this.themeManager.setTheme(data.theme);
+      }
+    });
+
     this.eventBus.on('view_statistics_requested', () => {
       this.showStatistics();
     });

@@ -71,40 +71,26 @@ export class ThemeManager {
      */
     this.themes = {
       light: {
-        '--bg-color': '#ffffff',
-        '--text-color': '#000000',
-        '--grid-border': '#333333',
+        '--bg-color': '#f5f5f5',
+        '--text-color': '#1a1a2e',
         '--cell-bg': '#ffffff',
-        '--cell-hover': '#e0e0e0',
-        '--cell-selected': '#bbdefb',
-        '--cell-fixed': '#f5f5f5',
-        '--cell-error': '#ffcdd2',
-        '--cell-hint': '#fff9c4',
-        '--cell-same-number': '#c5e1a5',
-        '--button-bg': '#2196f3',
-        '--button-hover': '#1976d2',
-        '--button-active': '#0d47a1',
-        '--panel-bg': '#fafafa',
-        '--border-color': '#e0e0e0',
-        '--shadow-color': 'rgba(0, 0, 0, 0.1)'
+        '--cell-selected': '#4ecca3',
+        '--cell-highlighted': '#e8f5e9',
+        '--cell-error': '#e94560',
+        '--panel-bg': '#ffffff',
+        '--border-color': '#ddd',
+        '--accent-color': '#4ecca3'
       },
       dark: {
-        '--bg-color': '#1e1e1e',
-        '--text-color': '#ffffff',
-        '--grid-border': '#cccccc',
-        '--cell-bg': '#2d2d2d',
-        '--cell-hover': '#3d3d3d',
-        '--cell-selected': '#1565c0',
-        '--cell-fixed': '#252525',
-        '--cell-error': '#c62828',
-        '--cell-hint': '#f9a825',
-        '--cell-same-number': '#558b2f',
-        '--button-bg': '#1976d2',
-        '--button-hover': '#1565c0',
-        '--button-active': '#0d47a1',
-        '--panel-bg': '#252525',
-        '--border-color': '#424242',
-        '--shadow-color': 'rgba(0, 0, 0, 0.3)'
+        '--bg-color': '#1a1a2e',
+        '--text-color': '#eee',
+        '--cell-bg': '#16213e',
+        '--cell-selected': '#4ecca3',
+        '--cell-highlighted': '#233554',
+        '--cell-error': '#e94560',
+        '--panel-bg': '#0f3460',
+        '--border-color': '#233554',
+        '--accent-color': '#4ecca3'
       }
     };
   }

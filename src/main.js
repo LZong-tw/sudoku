@@ -285,11 +285,27 @@ class SudokuApp {
       }
     });
 
-    // Notes mode toggle
+    // Settings changed
     this.eventBus.on(Events.SETTINGS_CHANGED, (data) => {
-      if (this.gameController && data.noteMode !== undefined) {
-        this.gameController.state.noteMode = data.noteMode;
-        this.showNotesModeIndicator(data.noteMode);
+      if (this.gameController) {
+        // Note mode
+        if (data.noteMode !== undefined) {
+          this.gameController.state.noteMode = data.noteMode;
+          this.showNotesModeIndicator(data.noteMode);
+        }
+        // Auto check
+        if (data.autoCheck !== undefined) {
+          this.gameController.state.autoCheck = data.autoCheck;
+        }
+        // Highlight same numbers
+        if (data.highlightSameNumbers !== undefined) {
+          this.gameController.state.highlightSameNumbers = data.highlightSameNumbers;
+          this.updateGridView();
+        }
+        // Sound
+        if (data.soundEnabled !== undefined && this.soundManager) {
+          data.soundEnabled ? this.soundManager.enable() : this.soundManager.disable();
+        }
       }
     });
 
